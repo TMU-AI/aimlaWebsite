@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="logo">
+  <title>Logo</title>
+  <circle cx="50" cy="50" r="45" fill="#61DAFB" />
+  <text x="50%" y="55%" font-size="18" text-anchor="middle" fill="#fff" font-family="Arial, Helvetica, sans-serif">AIMLA</text>
+</svg>
