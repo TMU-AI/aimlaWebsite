@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@fontsource/kaushan-script": "^4.5.2",
+    "@fontsource/orbitron": "^5.2.8",
     "@fontsource/sirin-stencil": "^4.5.2",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",

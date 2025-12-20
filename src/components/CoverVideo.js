@@ -67,17 +67,82 @@ const Title = styled.div`
     align-items: center;
     gap: 0.6rem;
     flex-wrap: nowrap;
-  
-  
-  
-  
+
+    .spacer {
+      width: 3rem; /* wider gap between TMU and AIMLA */
+      min-width: 1.2rem;
+      display: inline-block;
+    }
+  }
+
+  /* Mobile-only stacked lines (TMU / AI / ML) — hidden on desktop */
+  .mobile-lines {
+    display: none;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: center;
+  }
+
+  /* Responsive typography */
+  h1{
+    font-family: 'Orbitron', 'Sirin Stencil', sans-serif;
+    font-size: clamp(2.4rem, 8vw, 10rem); /* scales from phone to desktop */
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    margin: 0;
+    line-height: 1;
+  }
+
+  h2{
+    font-family: 'Sirin Stencil', sans-serif;
+    font-size: clamp(0.95rem, 3.5vw, 1.25rem);
+    margin: 0.5rem 0 0;
+    opacity: 0.95;
+  }
+
+  /* Extra small screens adjustments */
+  @media (max-width: 480px) {
+    /* hide per-letter desktop layout on phones */
+    .letters {
+      display: none;
+    }
+
+    /* show stacked mobile layout */
+    .mobile-lines {
+      display: flex;
+    }
+
+    .mobile-lines .mobile-line {
+      font-size: clamp(2.2rem, 10vw, 4.5rem);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .letters .spacer {
+      width: 1.2rem;
+      min-width: 1.2rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 12vw, 6rem);
+      letter-spacing: 0.03em;
+    }
+
+    h2 {
+      font-size: 0.95rem;
+    }
   }
 
 
   h1{
-    font-family: 'Kaushan Script', 'Sirin Stencil', sans-serif;
-    font-size: ${props => props.theme.frontxxxl};
-    text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+    font-family: 'Orbitron', 'Sirin Stencil', sans-serif;
+    font-size: ${props => props.theme.frontBig};
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
     margin: 0;
     line-height: 1;
   }
@@ -102,12 +167,19 @@ const CoverVideo = () => {
             <h1 data-scroll data-scroll-delay="0.03" data-scroll-speed="4">T</h1>
             <h1 data-scroll data-scroll-delay="0.06" data-scroll-speed="4">M</h1>
             <h1 data-scroll data-scroll-delay="0.12" data-scroll-speed="4">U</h1>
-            <h1 aria-hidden="true" style={{width: '1rem'}}>{'\u00A0'}</h1>
+            <div className="spacer" aria-hidden />
             <h1 data-scroll data-scroll-delay="0.18" data-scroll-speed="4">A</h1>
             <h1 data-scroll data-scroll-delay="0.24" data-scroll-speed="4">I</h1>
             <h1 data-scroll data-scroll-delay="0.30" data-scroll-speed="4">M</h1>
             <h1 data-scroll data-scroll-delay="0.36" data-scroll-speed="4">L</h1>
             <h1 data-scroll data-scroll-delay="0.42" data-scroll-speed="4">A</h1>
+          </div>
+
+          {/* Mobile stacked version: TMU / AI / ML */}
+          <div className="mobile-lines" aria-hidden="false">
+            <h1 className="mobile-line">TMU</h1>
+            <h1 className="mobile-line">AI</h1>
+            <h1 className="mobile-line">ML</h1>
           </div>
 
           <h2 data-scroll data-scroll-delay="0.42" data-scroll-speed="4">TMU AI and Machine Learning Association</h2>
