@@ -5,6 +5,7 @@ import { LocomotiveScrollProvider } from "react-locomotive-scroll";
 import { useRef } from "react";
 import 'locomotive-scroll/dist/locomotive-scroll.css'
 
+import Nav from './components/Nav';
 import Home from "./sections/Home"
 
 
@@ -19,6 +20,7 @@ function App() {
         <>
             <GlobalStyles />
             <ThemeProvider theme={dark}>
+                <Nav />
                 <LocomotiveScrollProvider
                     options={
                         {

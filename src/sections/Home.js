@@ -1,6 +1,8 @@
 import React from "react"
 import styled from "styled-components"
 import CoverVideo from "../components/CoverVideo"
+import Logo from "../components/Logo"
+import Nav from "../components/Nav"
 
 
 
@@ -14,8 +16,9 @@ const Home = () => {
     return(
         <Section>
             <CoverVideo />
-            <h1>Logo</h1>
-            <h1>NavBar</h1>
+            <Logo />
+            <Nav />
+            <h1>hey</h1>
         </Section>
     )
 }
