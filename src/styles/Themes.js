@@ -2,7 +2,7 @@
 
 export const dark = {
     body: '#202020',
-    text: '#ffff',
+    text: '#ffffff',
     bodyRgba: '32,32,32',
     textRgba: '255,255,255',
 
@@ -18,7 +18,7 @@ export const dark = {
     frontBig: '10em',
 
 
-    navHeight: 'Srem'
+    navHeight: '5rem'
 
 
 
