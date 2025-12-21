@@ -7,19 +7,23 @@ import ImgThree from "../assets/Images/crowd1.JPG";
 
 const Section = styled.section`
   width: 100%;
-  padding: 6rem 5vw 5rem;
+  padding: 9rem 4vw 5rem 0vw;
   background: radial-gradient(
       circle at top,
       rgba(255, 255, 255, 0.07),
-      transparent 60%
+      transparent 90%
     ),
     ${props => props.theme.body};
   color: ${props => props.theme.text};
 `;
 
 const Inner = styled.div`
-  max-width: 1180px;
+  max-width: 1100px;
+  width: 100%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 `;
 
 const Title = styled.h2`
@@ -34,11 +38,12 @@ const Title = styled.h2`
 
 const SectionHeader = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
   margin-bottom: 1.5rem;
-  text-align: center;
   gap: 0.4rem;
+  text-align: left;
 
   h3 {
     font-size: clamp(1.2rem, 3vw, 2rem);
@@ -54,8 +59,17 @@ const SectionHeader = styled.div`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.5rem;
+  width: 100%;
+
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Card = styled(motion.article)`
@@ -63,7 +77,7 @@ const Card = styled(motion.article)`
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 1rem;
   padding: 1.5rem;
-  min-height: 200px;
+  min-height: 210px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

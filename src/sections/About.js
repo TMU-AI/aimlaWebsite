@@ -30,6 +30,7 @@ font-weight: 700;
 letter-spacing: 0.06em;
 text-transform: uppercase;
 text-align: left;
+color: ${props => props.theme.text};
 
 margin-bottom: 3rem;
 position: relative;
@@ -47,14 +48,14 @@ align-items: start;
 
 const Copy = styled(motion.div)`
 color: ${props => props.theme.text};
-max-width: 520px;
-line-height: 1.6;
-font-size: clamp(1rem, 2vw, 1.35rem);
+max-width: 580px;
+line-height: 1.7;
+font-size: clamp(1.1rem, 2.2vw, 1.5rem);
 `
 
 const Highlight = styled.span`
 display: block;
-font-size: clamp(1.4rem, 3vw, 2rem);
+font-size: clamp(1.5rem, 3.3vw, 2.2rem);
 font-weight: 700;
 letter-spacing: 0.04em;
 text-transform: uppercase;
@@ -113,9 +114,9 @@ display: block;
 
 const About = () => {
     const gallery = [
-        { src: ImgOne, alt: "AIMLA workshop photo", contain: true, rotate: -9, top: '0%', left: '5%', z: 3, speed: -0.5 },
+        { src: ImgOne, alt: "AIMLA workshop photo", contain: true, rotate: -9, top: '0%', left: '0%', z: 3, speed: -0.5 },
         { src: ImgTwo, alt: "AIMLA team photo", contain: true, rotate: 5, top: '12%', left: '33%', z: 4, speed: 0.2 },
-        { src: ImgThree, alt: "AIMLA community crowd", rotate: -2, top: '38%', left: '15%', z: 2, speed: 0.5 }
+        { src: ImgThree, alt: "AIMLA community crowd", rotate: -2, top: '50%', left: '15%', z: 2, speed: 0.5 }
     ]
 
     return (

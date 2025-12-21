@@ -7,6 +7,9 @@ import 'locomotive-scroll/dist/locomotive-scroll.css'
 
 import Nav from './components/Nav';
 import Home from "./sections/Home"
+import About from "./sections/About";
+import Events from "./sections/Events";
+import Team from "./sections/Team";
 
 
 
@@ -39,6 +42,9 @@ function App() {
                 >
                     <main data-scroll-container ref={containerRef}>
                         <Home />
+                        <About />
+                        <Events />
+                        <Team />
                     </main>
                 </LocomotiveScrollProvider>
             </ThemeProvider>

@@ -20,7 +20,7 @@ const LogoImg = styled.img`
   display: block;
   opacity: 0; /* start hidden and fade in */
   /* larger and responsive: grows on wide screens, stays reasonable on phones */
-  width: clamp(5rem, 8vw, 12rem);
+  width: clamp(6rem, 12vw, 16rem);
   height: auto;
   transition: transform 180ms ease, filter 180ms ease;
   animation: ${fadeIn} 700ms ease forwards;
@@ -31,7 +31,7 @@ const LogoImg = styled.img`
   }
 
   @media (max-width: 480px) {
-    width: clamp(3.2rem, 18vw, 6rem);
+    width: clamp(4rem, 22vw, 8rem);
   }
 `
 
