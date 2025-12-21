@@ -17,8 +17,9 @@ const Wrapper = styled.div`
   @media (max-width: 768px) {
     top: auto;
     bottom: 1rem;
-    right: 50%;
-    transform: translateX(50%);
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -27,6 +28,9 @@ const Wrapper = styled.div`
     border-radius: 999px;
     padding: 0.6rem 0.8rem;
     gap: 0.6rem;
+    width: calc(100% - 1.5rem);
+    max-width: 420px;
+    box-sizing: border-box;
   }
 `;
 
