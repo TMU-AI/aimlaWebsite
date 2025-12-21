@@ -89,6 +89,7 @@ const ScrollIndicator = () => {
   const { scroll } = useLocomotiveScroll();
   const [active, setActive] = useState("home");
   const positionsRef = useRef([]);
+  const tickingRef = useRef(false);
 
   const computePositions = () => {
     positionsRef.current = sections
@@ -113,12 +114,17 @@ const ScrollIndicator = () => {
 
     if (scroll) {
       const handleScroll = args => {
-        const y = args?.scroll?.y ?? 0;
-        const refY = y + window.innerHeight * 0.25;
-        const current =
-          positionsRef.current.find(pos => refY >= pos.top && refY < pos.bottom) ||
-          positionsRef.current[0];
-        if (current) setActive(current.id);
+        if (tickingRef.current) return;
+        tickingRef.current = true;
+        requestAnimationFrame(() => {
+          const y = args?.scroll?.y ?? 0;
+          const refY = y + window.innerHeight * 0.15;
+          const current =
+            positionsRef.current.find(pos => refY >= pos.top && refY < pos.bottom) ||
+            positionsRef.current[0];
+          if (current) setActive(current.id);
+          tickingRef.current = false;
+        });
       };
 
       scroll.on("scroll", handleScroll);
@@ -130,11 +136,16 @@ const ScrollIndicator = () => {
       };
     } else {
       const onScroll = () => {
-        const y = window.scrollY + window.innerHeight * 0.25;
-        const current =
-          positionsRef.current.find(pos => y >= pos.top && y < pos.bottom) ||
-          positionsRef.current[0];
-        if (current) setActive(current.id);
+        if (tickingRef.current) return;
+        tickingRef.current = true;
+        requestAnimationFrame(() => {
+          const y = window.scrollY + window.innerHeight * 0.15;
+          const current =
+            positionsRef.current.find(pos => y >= pos.top && y < pos.bottom) ||
+            positionsRef.current[0];
+          if (current) setActive(current.id);
+          tickingRef.current = false;
+        });
       };
       window.addEventListener("scroll", onScroll);
       window.addEventListener("resize", handleResize);

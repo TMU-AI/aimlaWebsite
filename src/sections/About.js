@@ -130,7 +130,7 @@ const About = () => {
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.4 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
                 >
                     <Highlight>Hey we are TMU AIMLA</Highlight>
                     <p>
@@ -155,10 +155,10 @@ const About = () => {
                             $z={photo.z}
                             data-scroll
                             data-scroll-speed={photo.speed}
-                            initial={{ opacity: 0, y: 60, scale: 0.92 }}
+                            initial={{ opacity: 0, y: 50, scale: 0.94 }}
                             whileInView={{ opacity: 1, y: 0, scale: 1 }}
                             viewport={{ once: true, amount: 0.3 }}
-                            transition={{ duration: 0.55, delay: idx * 0.12, ease: "easeOut" }}
+                            transition={{ duration: 0.35, delay: idx * 0.08, ease: "easeOut" }}
                         >
                             <StyledImg
                                 src={photo.src}

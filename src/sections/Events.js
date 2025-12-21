@@ -314,7 +314,7 @@ const Events = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: 0.25 }}
               >
                 <div>
                   <CardTitle>{event.title}</CardTitle>
@@ -346,7 +346,7 @@ const Events = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4 }}
+                transition={{ duration: 0.25 }}
               >
                 <div>
                   <CardTitle>{event.title}</CardTitle>
