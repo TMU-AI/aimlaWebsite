@@ -1,9 +1,12 @@
+//Import all the pictures here and put the name accordingly please
+
 import React, { useState } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import ImgOne from "../assets/Images/2.JPG";
 import ImgTwo from "../assets/Images/aimlaTeam.JPG";
-import ImgThree from "../assets/Images/crowd1.JPG";
+import ImgThree from "../assets/Images/Food.JPG";
+import ImgFour from "../assets/Images/Event1.JPG";
 
 const Section = styled.section`
   width: 100%;
@@ -183,57 +186,60 @@ const DetailContent = styled(motion.div)`
 `;
 
 const Events = () => {
+  //-------------------------------- You can add new events and previous events here --------------------------------
   const upcomingEvents = [
     {
       id: "upcoming-1",
-      title: "AI Kickoff Night",
-      date: "Sept 28, 2024",
-      location: "SLC Auditorium",
+      title: "Compile and Conquer",
+      date: "🗓️TBA",
+      location: "📍TBA",
       description:
-        "Meet the exec team, learn about this year's roadmap, and grab your welcome kit."
+        "The Largest colaboration of Computing Student Event at Toronto Metropolitan University"
     },
-    {
+    /*{
       id: "upcoming-2",
-      title: "Intro to ML Workshop",
-      date: "Oct 10, 2024",
-      location: "ENG 204",
+      title: "Super Crazy Event!",
+      date: "🗓️Oct 10, 20xx",
+      location: "📍ENG 204",
       description: "Hands-on crash course covering data prep, models, and demos."
     },
     {
       id: "upcoming-3",
-      title: "Industry Mixer",
-      date: "Oct 24, 2024",
-      location: "DMZ Lounge",
+      title: "Super Crazy Event!",
+      date: "🗓️Oct 24, 20xx",
+      location: "📍IDK!",
       description: "Network with alumni and partners hiring for AI/ML roles."
     },
     {
       id: "upcoming-4",
-      title: "Hack the Future",
-      date: "Nov 5, 2024",
-      location: "ARC Innovation Lab",
+      title: "Super Crazy Event!",
+      date: "🗓️Nov 5, 20xx",
+      location: "📍Somewhere!",
       description: "24-hour sprint building AI projects aimed at campus life."
     }
+      */
   ];
 
+    //-------------------------------- You can add previous events here --------------------------------
   const previousEvents = [
     {
       id: "past-1",
-      title: "Spring Research Showcase",
-      date: "Apr 14, 2024",
+      title: "Q&A + Networking Event",
+      date: "Nov 19, 2025",
       description:
-        "Members presented projects covering healthcare AI, robotics, and generative design.",
-      link: "#",
-      cover: ImgOne
+        "A networking and Q&A event that connected TMU students with industry professionals and student leaders for open discussion, career insights, and community building.",
+      cover: ImgThree
     },
     {
       id: "past-2",
-      title: "Women in AI Panel",
-      date: "Mar 8, 2024",
+      title: "Kickoff Event",
+      date: "Mar 20, 2025",
       description:
-        "Leaders from industry shared career advice and opened mentorship spots.",
-      link: "#",
-      cover: ImgTwo
+        "TMU AIMLA’s kickoff event marked the start of the term by bringing together students interested in artificial intelligence and machine learning to connect, learn, and build community.",
+      cover: ImgFour
     },
+    
+    /*
     {
       id: "past-3",
       title: "Edge Device Hackathon",
@@ -251,7 +257,7 @@ const Events = () => {
         "A behind-the-scenes visit to TMU's intelligent mobility research hub.",
       link: "#",
       cover: ImgTwo
-    }
+    }*/
   ];
 
   const [showAllUpcoming, setShowAllUpcoming] = useState(false);
@@ -360,12 +366,6 @@ const Events = () => {
                     transition={{ duration: 0.3 }}
                   >
                     <p>{event.description}</p>
-                    <p>
-                      Photos:{" "}
-                      <a href={event.link} target="_blank" rel="noreferrer">
-                        View gallery
-                      </a>
-                    </p>
                   </DetailContent>
                 )}
               </AnimatePresence>
@@ -403,12 +403,6 @@ const Events = () => {
                       transition={{ duration: 0.3 }}
                     >
                       <p>{event.description}</p>
-                      <p>
-                        Photos:{" "}
-                        <a href={event.link} target="_blank" rel="noreferrer">
-                          View gallery
-                        </a>
-                      </p>
                     </DetailContent>
                   )}
                 </AnimatePresence>

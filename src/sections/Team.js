@@ -3,6 +3,29 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import PlaceholderImg from "../assets/Images/AIMLAlogo.png";
 
+//Members:
+import antonio from "../assets/Images/2025-26 team/Antonio.png"
+import areej from "../assets/Images/2025-26 team/Areej.png"
+import joel from "../assets/Images/2025-26 team/Joel.png"
+import oliver from "../assets/Images/2025-26 team/Oliver.png"
+import jenison from "../assets/Images/2025-26 team/Jenison.png"
+import jermain from "../assets/Images/2025-26 team/Jermain.png"
+import belal from "../assets/Images/2025-26 team/Belal.png"
+import jarin from "../assets/Images/2025-26 team/Jarin.png"
+import seif from "../assets/Images/2025-26 team/Seif.png"
+import christina from "../assets/Images/2025-26 team/Christina.png"
+import zu from "../assets/Images/2025-26 team/Zulaikha.png"
+import derrick from "../assets/Images/2025-26 team/Derrick.png"
+import walker from "../assets/Images/2025-26 team/Walker.png"
+import nousha from "../assets/Images/2025-26 team/Nousha.png"
+import maryam from "../assets/Images/2025-26 team/Maryam.png"
+import shriya from "../assets/Images/2025-26 team/Shriya.png"
+import malaika from "../assets/Images/2025-26 team/Malaika.png"
+import null1 from "../assets/Images/2025-26 team/null1.png"
+import null2 from "../assets/Images/2025-26 team/null2.png"
+import null3 from "../assets/Images/2025-26 team/null3.png"
+import null4 from "../assets/Images/2025-26 team/null4.png"
+
 const Section = styled.section`
   width: 100%;
   padding: 8rem 4vw 5rem 0vw;
@@ -56,6 +79,13 @@ const TeamCard = styled(motion.article)`
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
+`;
+
+const FeaturedCard = styled(TeamCard)`
+  max-width: 780px;
+  margin: 0 auto;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.25));
+  border: 1px solid rgba(255, 255, 255, 0.2);
 `;
 
 const Heading = styled.div`
@@ -172,113 +202,127 @@ const teamStructure = [
   {
     name: "President",
     vp: {
-      name: "Sofia Patel",
+      name: "Antonio Souza",
       title: "President",
-      linkedin: "#",
-      photo: PlaceholderImg
+      linkedin: "https://www.linkedin.com/in/antonio-souza-/",
+      photo: antonio
     },
     subteams: ["Strategy Council", "Advisory Board"],
     members: [
-      { name: "Jordan Lee", role: "Chief of Staff", linkedin: "#", photo: PlaceholderImg },
-      { name: "Maya Torres", role: "Operations", linkedin: "#", photo: PlaceholderImg }
     ]
   },
   {
     name: "Events",
-    vp: {
-      name: "Marcus Wang",
-      title: "VP Events",
-      linkedin: "#",
-      photo: PlaceholderImg
-    },
+    vp: [
+      {
+        name: "Areej Ubaid",
+        title: "VP Events",
+        linkedin: "https://www.linkedin.com/in/areej-ubaid/",
+        photo: areej
+      },
+      {
+        name: "Jarin Yasmin Mim",
+        title: "VP Events",
+        linkedin: "https://www.linkedin.com/in/jarin-tasnim-mim-b47310390/",
+        photo: jarin
+      }
+    ],
     subteams: ["Logistics", "Experience", "Partnerships"],
     members: [
-      { name: "Priya Menon", role: "Experience Lead", linkedin: "#", photo: PlaceholderImg },
-      { name: "Leo Park", role: "Sponsorships", linkedin: "#", photo: PlaceholderImg }
+      //No sub members
     ]
   },
   {
     name: "Finances",
     vp: {
-      name: "Elena Rossi",
+      name: "Seif Eltamboly",
       title: "VP Finance",
-      linkedin: "#",
-      photo: PlaceholderImg
+      linkedin: "https://www.linkedin.com/in/seifeltamboly/",
+      photo: seif
     },
     subteams: ["Budgeting", "Funding"],
     members: [
-      { name: "Samir Khan", role: "Budget Analyst", linkedin: "#", photo: PlaceholderImg },
-      { name: "Hannah Doyle", role: "Fundraising", linkedin: "#", photo: PlaceholderImg }
+      //No sub members
     ]
   },
   {
     name: "Marketing",
     vp: {
-      name: "Noah Martinez",
+      name: "Jermain Antillon",
       title: "VP Marketing",
       linkedin: "#",
-      photo: PlaceholderImg
+      photo: jermain
     },
     subteams: ["Brand", "Campaigns"],
     members: [
-      { name: "Isabella Cruz", role: "Brand Designer", linkedin: "#", photo: PlaceholderImg },
-      { name: "Ethan Price", role: "Copywriter", linkedin: "#", photo: PlaceholderImg }
+      { name: "Joel", linkedin: "#", photo: joel },
+      { name: "Maryam Mehdi", linkedin: "#", photo: maryam },
+      { name: "Shriya Gill", linkedin: "#", photo: shriya },
+      { name: "Lana Duong", linkedin: "https://www.linkedin.com/in/lana-duong-b884012bb/", photo: null1 }
+
     ]
   },
   {
     name: "Infrastructure",
     vp: {
-      name: "Gabriel Singh",
+      name: "Oliver Manuel",
       title: "VP Infrastructure",
-      linkedin: "#",
-      photo: PlaceholderImg
+      linkedin: "https://www.linkedin.com/in/oliver-manuel-86b4b9387/",
+      photo: oliver
     },
-    subteams: ["DevOps", "Hardware"],
+    subteams: ["DevOps", "Hardware", "AI Models"],
     members: [
-      { name: "Ayaan Malik", role: "Systems Lead", linkedin: "#", photo: PlaceholderImg },
-      { name: "Lena Hoffman", role: "Lab Manager", linkedin: "#", photo: PlaceholderImg }
+      { name: "Derrick Lam",  linkedin: "https://www.linkedin.com/in/derrick-lam-09575b219/", photo: derrick },
+      { name: "Skye", linkedin: "https://www.linkedin.com/in/dean-torallo/", photo: null2 },
+      { name: "Walker Egsgard", linkedin: "https://www.linkedin.com/in/walker-egsgard/", photo: walker },
     ]
   },
   {
     name: "Outreach",
     vp: {
-      name: "Tessa Morgan",
+      name: "Jenison Joseph",
       title: "VP Outreach",
-      linkedin: "#",
-      photo: PlaceholderImg
+      linkedin: "https://www.linkedin.com/in/jenison-joseph-491077258/",
+      photo: jenison
     },
     subteams: ["Community", "Partners"],
     members: [
-      { name: "Riley Chen", role: "Community Liaison", linkedin: "#", photo: PlaceholderImg },
-      { name: "Diego Alvarez", role: "Partnerships", linkedin: "#", photo: PlaceholderImg }
+      { name: "Ronald Bessada", linkedin: "https://www.linkedin.com/in/ronald-bessada-3b176a34a/", photo: null3 },
+  
     ]
   },
   {
     name: "Social Media",
-    vp: {
-      name: "Harper O'Neil",
-      title: "VP Social Media",
-      linkedin: "#",
-      photo: PlaceholderImg
-    },
-    subteams: [],
+    vp: [
+      {
+        name: "Christina Vanni",
+        title: "VP Social Media",
+        linkedin: "https://www.linkedin.com/in/christina-vanni-1ba709389/",
+        photo: christina
+      },
+      {
+        name: "Zulaikha Khoram",
+        title: "VP Social Media",
+        linkedin: "https://www.linkedin.com/in/zulaikha-khoram-aa5186299/",
+        photo: zu
+      }
+    ],
+    subteams: ["Instagram", "Linkedin", "Content"],
     members: [
-      { name: "Mila Santos", role: "Content", linkedin: "#", photo: PlaceholderImg },
-      { name: "Omar Reyes", role: "Video", linkedin: "#", photo: PlaceholderImg }
+     // No members
     ]
   },
   {
     name: "Education",
     vp: {
-      name: "Lucas Bennett",
+      name: "Belal Armanazi",
       title: "VP Education",
-      linkedin: "#",
-      photo: PlaceholderImg
+      linkedin: "https://www.linkedin.com/in/belal-armanazi/",
+      photo: belal
     },
-    subteams: ["Workshops", "Projects"],
+    subteams: ["Workshops", "Projects", "Teaching"],
     members: [
-      { name: "Caroline Zhou", role: "Workshop Lead", linkedin: "#", photo: PlaceholderImg },
-      { name: "Nina Patel", role: "Project Mentor", linkedin: "#", photo: PlaceholderImg }
+      { name: "Nousha Borhani", linkedin: "https://www.linkedin.com/in/nousha-borhani/", photo: nousha },
     ]
   },
   {
@@ -286,12 +330,76 @@ const teamStructure = [
     vp: null,
     subteams: ["All Disciplines"],
     members: [
-      { name: "Open Roles", role: "Join the crew", linkedin: "#", photo: PlaceholderImg }
+      { name: "Malaika Ali",  linkedin: "https://www.linkedin.com/in/malaika-ali-52a1b7239/", photo: malaika }
     ]
   }
 ];
 
 const Team = () => {
+  const president = teamStructure.find(team => team.name === "President");
+  const otherTeams = teamStructure.filter(team => team.name !== "President");
+
+  const CardContent = ({ team }) => {
+    const leaders = Array.isArray(team.vp) ? team.vp : team.vp ? [team.vp] : [];
+    const leaderNames = leaders.map(leader => leader.name).join(" & ");
+    const leaderTitle = leaders[0]?.title || "Leadership";
+
+    return (
+      <>
+        <Heading>
+          <h3>{team.name}</h3>
+          {leaders.length ? (
+            <span>
+              Led by {leaderTitle}
+              {leaderNames ? ` — ${leaderNames}` : ""}
+            </span>
+          ) : (
+            <span>Open membership collective</span>
+          )}
+        </Heading>
+
+        {leaders.length ? (
+          leaders.map(leader => (
+            <Lead key={leader.name}>
+              <Avatar src={leader.photo} alt={`${leader.name} avatar`} />
+              <LeadInfo>
+                <strong>{leader.name}</strong>
+                <a href={leader.linkedin} target="_blank" rel="noreferrer">
+                  LinkedIn
+                </a>
+              </LeadInfo>
+            </Lead>
+          ))
+        ) : (
+          <Note>No VP assignment — guided by our exec council.</Note>
+        )}
+
+      {team.subteams?.length ? (
+        <SubteamTags>
+          {team.subteams.map(tag => (
+            <Tag key={tag}>{tag}</Tag>
+          ))}
+        </SubteamTags>
+      ) : (
+        <Note>No formal subteam — agile social squad.</Note>
+      )}
+
+      <MemberList>
+        {team.members.map(member => (
+          <MemberCard key={member.name}>
+            <MemberAvatar src={member.photo} alt={`${member.name} portrait`} />
+            <MemberName>{member.name}</MemberName>
+            <MemberRole>{member.role}</MemberRole>
+            <MemberLink href={member.linkedin} target="_blank" rel="noreferrer">
+              LinkedIn
+            </MemberLink>
+          </MemberCard>
+        ))}
+      </MemberList>
+      </>
+    );
+  };
+
   return (
     <Section id="team">
       <Inner>
@@ -304,8 +412,20 @@ const Team = () => {
           building AIMLA.
         </Intro>
 
+        {president && (
+          <FeaturedCard
+            key={president.name}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.4 }}
+          >
+            <CardContent team={president} />
+          </FeaturedCard>
+        )}
+
         <TeamGrid>
-          {teamStructure.map(team => (
+          {otherTeams.map(team => (
             <TeamCard
               key={team.name}
               initial={{ opacity: 0, y: 30 }}
@@ -313,51 +433,7 @@ const Team = () => {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.4 }}
             >
-              <Heading>
-                <h3>{team.name}</h3>
-                {team.vp ? (
-                  <span>Led by {team.vp.title}</span>
-                ) : (
-                  <span>Open membership collective</span>
-                )}
-              </Heading>
-
-              {team.vp ? (
-                <Lead>
-                  <Avatar src={team.vp.photo} alt={`${team.vp.name} avatar`} />
-                  <LeadInfo>
-                    <strong>{team.vp.name}</strong>
-                    <a href={team.vp.linkedin} target="_blank" rel="noreferrer">
-                      LinkedIn
-                    </a>
-                  </LeadInfo>
-                </Lead>
-              ) : (
-                <Note>No VP assignment — guided by our exec council.</Note>
-              )}
-
-              {team.subteams?.length ? (
-                <SubteamTags>
-                  {team.subteams.map(tag => (
-                    <Tag key={tag}>{tag}</Tag>
-                  ))}
-                </SubteamTags>
-              ) : (
-                <Note>No formal subteam — agile social squad.</Note>
-              )}
-
-              <MemberList>
-                {team.members.map(member => (
-                  <MemberCard key={member.name}>
-                    <MemberAvatar src={member.photo} alt={`${member.name} portrait`} />
-                    <MemberName>{member.name}</MemberName>
-                    <MemberRole>{member.role}</MemberRole>
-                    <MemberLink href={member.linkedin} target="_blank" rel="noreferrer">
-                      LinkedIn
-                    </MemberLink>
-                  </MemberCard>
-                ))}
-              </MemberList>
+              <CardContent team={team} />
             </TeamCard>
           ))}
         </TeamGrid>
