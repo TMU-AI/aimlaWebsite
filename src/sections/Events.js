@@ -109,6 +109,13 @@ const Description = styled.p`
   flex: 1;
 `;
 
+const Actions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+`;
+
 const PrimaryButton = styled.button`
   align-self: flex-start;
   padding: 0.45rem 1.2rem;
@@ -124,6 +131,12 @@ const PrimaryButton = styled.button`
   &:hover {
     background: ${props => props.theme.text};
     color: ${props => props.theme.body};
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: rgba(255, 255, 255, 0.35);
   }
 `;
 
@@ -186,7 +199,7 @@ const DetailContent = styled(motion.div)`
 `;
 
 const Events = () => {
-  //-------------------------------- You can add new events and previous events here --------------------------------
+  //-------------------------------- You can add new events and previous events here -------------------------------- For sign ups, you just need to change it to "true", then add the link
   const upcomingEvents = [
     {
       id: "upcoming-1",
@@ -194,22 +207,30 @@ const Events = () => {
       date: "🗓️TBA",
       location: "📍TBA",
       description:
-        "The Largest colaboration of Computing Student Event at Toronto Metropolitan University"
-    },
-    /*{
-      id: "upcoming-2",
-      title: "Super Crazy Event!",
-      date: "🗓️Oct 10, 20xx",
-      location: "📍ENG 204",
-      description: "Hands-on crash course covering data prep, models, and demos."
+        "The Largest colaboration of Computing Student Event at Toronto Metropolitan University",
+      signUpOpen: false,
+      signUpLink: "#"
     },
     {
-      id: "upcoming-3",
-      title: "Super Crazy Event!",
-      date: "🗓️Oct 24, 20xx",
-      location: "📍IDK!",
-      description: "Network with alumni and partners hiring for AI/ML roles."
+      id: "upcoming-2",
+      title: "AWS & TMU AIMLA Collab!",
+      date: "🗓️TBA",
+      location: "📍TBA",
+      description: "A intersection between Amazon Web Service and AI/ML.",
+      signUpOpen: false,
+      signUpLink: "#"
     },
+    
+    {
+      id: "upcoming-3",
+      title: "TMU Tech Week with BYTE!",
+      date: "🗓️TBA",
+      location: "📍TBA",
+      description: "A coding competition within TMU for TMU Tech week!",
+      signUpOpen: false,
+      signUpLink: "#"
+    },
+    /*
     {
       id: "upcoming-4",
       title: "Super Crazy Event!",
@@ -294,16 +315,28 @@ const Events = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4 }}
-            >
-              <div>
-                <CardTitle>{event.title}</CardTitle>
-                <Meta>{event.date}</Meta>
-                <Location>{event.location}</Location>
-                <Description>{event.description}</Description>
-              </div>
-            </Card>
-          ))}
-        </Grid>
+              >
+                <div>
+                  <CardTitle>{event.title}</CardTitle>
+                  <Meta>{event.date}</Meta>
+                  <Location>{event.location}</Location>
+                  <Description>{event.description}</Description>
+                  <Actions>
+                    <PrimaryButton
+                      as="a"
+                      href={event.signUpOpen ? event.signUpLink : undefined}
+                      target="_blank"
+                      rel="noreferrer"
+                      disabled={!event.signUpOpen}
+                      aria-disabled={!event.signUpOpen}
+                    >
+                      {event.signUpOpen ? "Sign Up" : "Sign Ups Closed"}
+                    </PrimaryButton>
+                  </Actions>
+                </div>
+              </Card>
+            ))}
+          </Grid>
 
         {showAllUpcoming && extraUpcoming.length > 0 && (
           <Grid style={{ marginTop: "1.5rem" }}>
@@ -320,6 +353,18 @@ const Events = () => {
                   <Meta>{event.date}</Meta>
                   <Location>{event.location}</Location>
                   <Description>{event.description}</Description>
+                  <Actions>
+                    <PrimaryButton
+                      as="a"
+                      href={event.signUpOpen ? event.signUpLink : undefined}
+                      target="_blank"
+                      rel="noreferrer"
+                      disabled={!event.signUpOpen}
+                      aria-disabled={!event.signUpOpen}
+                    >
+                      {event.signUpOpen ? "Sign Up" : "Sign Ups Closed"}
+                    </PrimaryButton>
+                  </Actions>
                 </div>
               </Card>
             ))}
