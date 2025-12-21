@@ -11,8 +11,23 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 2rem;
+  gap: 0.8rem;
   pointer-events: none;
+
+  @media (max-width: 768px) {
+    top: auto;
+    bottom: 1rem;
+    right: 50%;
+    transform: translateX(50%);
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    padding: 0.6rem 0.8rem;
+    gap: 0.6rem;
+  }
 `;
 
 const Item = styled.button`
@@ -33,6 +48,10 @@ const Item = styled.button`
     opacity: 1;
     border-color: ${props => props.theme.text};
   }
+
+  @media (max-width: 768px) {
+    padding: 0.35rem 0.65rem;
+  }
 `;
 
 const Dot = styled.span`
@@ -48,6 +67,10 @@ const Label = styled.span`
   font-size: 0.85rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+
+  @media (max-width: 768px) {
+    font-size: 0.75rem;
+  }
 `;
 
 const sections = [
