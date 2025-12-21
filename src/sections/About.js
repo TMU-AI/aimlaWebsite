@@ -120,7 +120,7 @@ const About = () => {
     ]
 
     return (
-        <Section>
+        <Section id="about" data-scroll-section>
             <Title data-scroll data-scroll-speed='-2' data-scroll-direction='horizontal'>
                 About Us
             </Title>
@@ -134,12 +134,14 @@ const About = () => {
                 >
                     <Highlight>Hey we are TMU AIMLA</Highlight>
                     <p>
-                        (Placeholder copy) We are a community dedicated to building, sharing, and learning the future of artificial
-                        intelligence and machine learning at TMU. Expect workshops, collaborative projects, and a network that
-                        empowers students to make a real impact.
+                        We bridge the gap between classroom theory and real-world AI. AIMLA is the club where TMU students roll up
+                        their sleeves on hands-on projects, learn modern tools together, and get guidance from industry professionals
+                        who have been down the path before.
                     </p>
                     <p>
-                        This space will feature our mission, impact, and how you can get involved with our initiatives across campus.
+                        From building models to shipping demos, we create a supportive space to experiment, ask questions, and move
+                        faster than any syllabus. If you want to turn curiosity into capability—and do it alongside a community that
+                        believes you can—this is your launchpad.
                     </p>
                 </Copy>
 

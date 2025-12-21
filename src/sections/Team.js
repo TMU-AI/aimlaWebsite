@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import PlaceholderImg from "../assets/Images/AIMLAlogo.png";
+
 
 //Members:
 import antonio from "../assets/Images/2025-26 team/Antonio.png"
@@ -24,7 +24,7 @@ import malaika from "../assets/Images/2025-26 team/Malaika.png"
 import null1 from "../assets/Images/2025-26 team/null1.png"
 import null2 from "../assets/Images/2025-26 team/null2.png"
 import null3 from "../assets/Images/2025-26 team/null3.png"
-import null4 from "../assets/Images/2025-26 team/null4.png"
+
 
 const Section = styled.section`
   width: 100%;
@@ -401,7 +401,7 @@ const Team = () => {
   };
 
   return (
-    <Section id="team">
+    <Section id="team" data-scroll-section>
       <Inner>
         <Title data-scroll data-scroll-speed="-1.2" data-scroll-direction="horizontal">
           Meet the Team

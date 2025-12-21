@@ -18,7 +18,7 @@ export const dark = {
     frontBig: '10em',
 
 
-    navHeight: '5rem'
+    navHeight: '2.5rem'
 
 
 

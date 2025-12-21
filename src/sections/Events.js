@@ -275,7 +275,7 @@ const Events = () => {
   };
 
   return (
-    <Section id="events">
+    <Section id="events" data-scroll-section>
       <Inner>
         <Title data-scroll data-scroll-speed='-1.5' data-scroll-direction='horizontal'>
           Events

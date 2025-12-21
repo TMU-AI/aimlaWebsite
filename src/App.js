@@ -5,11 +5,12 @@ import { LocomotiveScrollProvider } from "react-locomotive-scroll";
 import { useRef } from "react";
 import 'locomotive-scroll/dist/locomotive-scroll.css'
 
-import Nav from './components/Nav';
+import ScrollIndicator from './components/ScrollIndicator';
 import Home from "./sections/Home"
 import About from "./sections/About";
 import Events from "./sections/Events";
 import Team from "./sections/Team";
+import Join from "./sections/Join";
 
 
 
@@ -23,7 +24,6 @@ function App() {
         <>
             <GlobalStyles />
             <ThemeProvider theme={dark}>
-                <Nav />
                 <LocomotiveScrollProvider
                     options={
                         {
@@ -41,10 +41,12 @@ function App() {
                     containerRef={containerRef}
                 >
                     <main data-scroll-container ref={containerRef}>
+                        <ScrollIndicator />
                         <Home />
                         <About />
                         <Events />
                         <Team />
+                        <Join />
                     </main>
                 </LocomotiveScrollProvider>
             </ThemeProvider>
