@@ -255,7 +255,7 @@ const teamStructure = [
     },
     subteams: ["Brand", "Campaigns"],
     members: [
-      { name: "Joel", linkedin: "#", photo: joel },
+      { name: "Joel Oguachuba", linkedin: "https://www.linkedin.com/in/joel-oguachuba-4368962b5/", photo: joel },
       { name: "Maryam Mehdi", linkedin: "#", photo: maryam },
       { name: "Shriya Gill", linkedin: "#", photo: shriya },
       { name: "Lana Duong", linkedin: "https://www.linkedin.com/in/lana-duong-b884012bb/", photo: null1 }
