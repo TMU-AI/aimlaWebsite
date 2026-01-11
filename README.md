@@ -35,3 +35,6 @@ Modern single-page site for TMU AIMLA, built with React, styled-components, and 
 
 ## Contribution
 PRs welcome. Keep styling consistent (styled-components) and prefer `rg` for search. Include smooth scroll IDs when adding new sections.
+
+
+This is also deployed on Vercel. 
