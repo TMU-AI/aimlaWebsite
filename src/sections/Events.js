@@ -225,7 +225,7 @@ const Events = () => {
       id: "upcoming-3",
       title: "Code Blitz",
       date: "🗓️Feb 17th, 6pm",
-      location: "📍TBA",
+      location: "📍ENG101",
       description: "A coding competition within TMU for TMU Tech week! Students outside of TMU are welcome.",
       signUpOpen: true,
       signUpLink: "https://forms.gle/3r5roJwHQhwSLEzX8"
