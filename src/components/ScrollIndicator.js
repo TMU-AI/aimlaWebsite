@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import styled from "styled-components";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 
@@ -91,19 +91,20 @@ const ScrollIndicator = () => {
   const positionsRef = useRef([]);
   const tickingRef = useRef(false);
 
-  const computePositions = () => {
-    positionsRef.current = sections
-      .map(section => {
-        const el = document.getElementById(section.id);
-        if (!el) return null;
-        const rect = el.getBoundingClientRect();
-        const baseY = scroll?.scroll?.instance?.scroll?.y || 0;
-        const top = rect.top + baseY;
-        const height = el.offsetHeight;
-        return { id: section.id, top, bottom: top + height };
-      })
-      .filter(Boolean);
-  };
+  const computePositions = useCallback(() => {
+  positionsRef.current = sections
+    .map(section => {
+      const el = document.getElementById(section.id);
+      if (!el) return null;
+      const rect = el.getBoundingClientRect();
+      const baseY = scroll?.scroll?.instance?.scroll?.y || 0;
+      const top = rect.top + baseY;
+      const height = el.offsetHeight;
+      return { id: section.id, top, bottom: top + height };
+    })
+    .filter(Boolean);
+}, [scroll]);
+
 
   useEffect(() => {
     computePositions();
@@ -154,7 +155,7 @@ const ScrollIndicator = () => {
         window.removeEventListener("resize", handleResize);
       };
     }
-  }, [scroll]);
+  }, [computePositions, scroll]);
 
   const scrollToId = id => {
     const target = document.getElementById(id);
