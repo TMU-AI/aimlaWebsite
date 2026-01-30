@@ -236,7 +236,7 @@ const Events = () => {
       title: "MCU x AIMLA Personal J.A.R.V.I.S",
       date: "🗓️Mar 9, 6pm",
       location: "📍TBA",
-      description: "24-hour sprint building AI projects aimed at campus life.",
+      description: "A personal AI assistant just like Ironman's JARVIS🤖",
       signUpOpen: false,
       signUpLink: "#"
     }
