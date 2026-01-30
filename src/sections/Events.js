@@ -223,22 +223,24 @@ const Events = () => {
     
     {
       id: "upcoming-3",
-      title: "TMU Tech Week with BYTE!",
-      date: "🗓️TBA",
+      title: "Code Blitz",
+      date: "🗓️Feb 17th, 6pm",
       location: "📍TBA",
-      description: "A coding competition within TMU for TMU Tech week!",
-      signUpOpen: false,
-      signUpLink: "#"
+      description: "A coding competition within TMU for TMU Tech week! Students outside of TMU are welcome.",
+      signUpOpen: true,
+      signUpLink: "https://forms.gle/3r5roJwHQhwSLEzX8"
     },
-    /*
+    
     {
       id: "upcoming-4",
-      title: "Super Crazy Event!",
-      date: "🗓️Nov 5, 20xx",
-      location: "📍Somewhere!",
-      description: "24-hour sprint building AI projects aimed at campus life."
+      title: "MCU x AIMLA Personal J.A.R.V.I.S",
+      date: "🗓️Mar 9, 6pm",
+      location: "📍TBA",
+      description: "24-hour sprint building AI projects aimed at campus life.",
+      signUpOpen: false,
+      signUpLink: "#"
     }
-      */
+      
   ];
 
     //-------------------------------- You can add previous events here --------------------------------
