@@ -251,12 +251,13 @@ const CoverVideo = () => {
                 key={i}
                 className="scatter-letter"
                 style={{
-                  ['--delay']: `${l.delay}ms`,
-                  ['--tx']: l.tx,
-                  ['--ty']: l.ty,
-                  ['--r']: l.r,
-                  ['--s']: l.s,
+                  '--delay': delay,
+                  '--tx': tx,
+                  '--ty': ty,
+                  '--r': r,
+                  '--s': s,
                 }}
+
                 dangerouslySetInnerHTML={{ __html: l.ch === ' ' ? '&nbsp;' : l.ch }}
               />
             ))}
