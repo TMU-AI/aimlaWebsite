@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
-import ImgOne from "../assets/Images/2.JPG";
-import ImgTwo from "../assets/Images/aimlaTeam.JPG";
+//import ImgOne from "../assets/Images/2.JPG";
+//import ImgTwo from "../assets/Images/aimlaTeam.JPG";
 import ImgThree from "../assets/Images/Food.JPG";
 import ImgFour from "../assets/Images/Event1.JPG";
 
