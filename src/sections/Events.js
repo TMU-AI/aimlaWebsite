@@ -201,16 +201,7 @@ const DetailContent = styled(motion.div)`
 const Events = () => {
   //-------------------------------- You can add new events and previous events here -------------------------------- For sign ups, you just need to change it to "true", then add the link
   const upcomingEvents = [
-    {
-      id: "upcoming-1",
-      title: "Compile and Conquer",
-      date: "🗓️TBA",
-      location: "📍TBA",
-      description:
-        "The Largest colaboration of Computing Student Event at Toronto Metropolitan University",
-      signUpOpen: false,
-      signUpLink: "#"
-    },
+    
     {
       id: "upcoming-2",
       title: "AWS & TMU AIMLA Collab!",
@@ -260,6 +251,15 @@ const Events = () => {
       description:
         "TMU AIMLA’s kickoff event marked the start of the term by bringing together students interested in artificial intelligence and machine learning to connect, learn, and build community.",
       cover: ImgFour
+    },
+
+    {
+      id: "past-3",
+      title: "Compile and Conquer",
+      date: "Mar 26, 2026",
+      description:
+        "The Largest colaboration of Computing Student Event at Toronto Metropolitan University",
+      cover: compile.JPG
     },
     
     /*
