@@ -259,7 +259,7 @@ const Events = () => {
       date: "Mar 26, 2026",
       description:
         "The Largest colaboration of Computing Student Event at Toronto Metropolitan University",
-      cover: compile.JPG
+      cover: "compile.JPG"
     },
     
     /*
