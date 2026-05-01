@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 //import ImgTwo from "../assets/Images/aimlaTeam.JPG";
 import ImgThree from "../assets/Images/Food.JPG";
 import ImgFour from "../assets/Images/Event1.JPG";
+import compile from "../assets/Images/compile.JPG";
 
 const Section = styled.section`
   width: 100%;
@@ -259,7 +260,7 @@ const Events = () => {
       date: "Mar 26, 2026",
       description:
         "The Largest colaboration of Computing Student Event at Toronto Metropolitan University",
-      cover: "compile.JPG"
+      cover: compile
     },
     
     /*
