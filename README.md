@@ -44,4 +44,3 @@ PRs welcome. Keep styling consistent (styled-components) and prefer `rg` for sea
 
 
 This is also deployed on Vercel. 
-
