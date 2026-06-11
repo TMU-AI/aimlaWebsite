@@ -37,17 +37,18 @@ def find_best_match(user_input: str) -> tuple:
 
     return best_page, best_score
 
-print("AIMLA Intent Matcher — type a query, press Enter")
-print("Type 'quit' to exit\n")
+if __name__ == "__main__":
+    print("AIMLA Intent Matcher — type a query, press Enter")
+    print("Type 'quit' to exit\n")
 
-while True:
-    user_input = input("You: ").strip()
-    
-    if user_input.lower() == "quit":
-        break
-    
-    if not user_input:
-        continue
-    
-    page, score = find_best_match(user_input)
-    print(f"→ Matched: [{page}] (confidence: {score:.2f})\n")
+    while True:
+        user_input = input("You: ").strip()
+        
+        if user_input.lower() == "quit":
+            break
+        
+        if not user_input:
+            continue
+        
+        page, score = find_best_match(user_input)
+        print(f"→ Matched: [{page}] (confidence: {score:.2f})\n")
