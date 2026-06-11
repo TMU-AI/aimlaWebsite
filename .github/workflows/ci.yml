@@ -22,8 +22,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install ".[dev]"
-        working-directory: .
+          pip install sentence-transformers scikit-learn numpy pytest
 
       - name: Run tests
         run: |
