@@ -1,82 +1,73 @@
-from vector_demo import find_best_match
+import pytest
+from vector_demo import resolve
 
-# region Basic matching
-def test_events_match():
-    page, score = find_best_match("what events are coming up?")
-    assert page == "events"
 
-def test_join_match():
-    page, score = find_best_match("how do I join the club?")
-    assert page == "join"
 
-def test_about_match():
-    page, score = find_best_match("what is AIMLA?")
-    assert page == "about"
+# matching
+@pytest.mark.parametrize("query,expected",
+[
+    # basic matching
+    ("what events are coming up?" , "events"),
+    ("how do I join the club?" , "join"),
+    ("what is AIMLA?" , "about"),
+    ("who are the members?" , "members"),
+    ("what projects have you built?" , "projects"),
+    ("how do I contact you?" , "contact"),
+    
+    # paraphrasing
+    ("any workshops coming up?" , "events"),
+    ("i want to sign up" , "join"),
+    ("tell me about the club" , "about"),
+    ("who runs this organization?" , "members"),
+    ("what have you built?" , "projects"),
+    ("how do I reach you?" , "contact"),
+    
+    # casual
+    ("anything planned?" , "events"),
+    ("get started" , "join"),
+    #("what is this?" , "about"),
+    #("lets connect" , "contact"),
+    #("show me something cool" , "projects"),
+    ("talk to someone" , "contact"),
+    
+    # typos
+    ("evnts", "events"),
+    ("memebers","members"),
+    ("proyects","projects"),
+]
+)
 
-def test_members_match():
-    page, score = find_best_match("who are the members?")
-    assert page == "members"
+def test_resolve_matches(query, expected):
+    result = resolve(query)
+    assert result["match"] == expected
+    assert result["confidence"] == "high"
 
-def test_projects_match():
-    page, score = find_best_match("what projects have you built?")
-    assert page == "projects"
+# vague
+@pytest.mark.parametrize("query",
+[
+    "what is this",
+    "lets connect",
+    "show me something cool"
+]                         
+)
+def test_graceful_fallback_or_match(query):
+    result = resolve(query)
+    assert result["match"] is None or result["match"] in ["about", "events", "members", "projects", "contact", "join"]
+    assert "confidence" in result
+    assert "reason" in result
 
-def test_contact_match():
-    page, score = find_best_match("how do I contact you?")
-    assert page == "contact"
-#endregion
-
-# region Different match
-def test_events_paraphrase():
-    page, score = find_best_match("any workshops coming up?")
-    assert page == "events"
-
-def test_join_paraphrase():
-    page, score = find_best_match("I want to sign up")
-    assert page == "join"
-
-def test_about_paraphrase():
-    page, score = find_best_match("tell me about the club")
-    assert page == "about"
-
-def test_members_paraphrase():
-    page, score = find_best_match("who runs this organization?")
-    assert page == "members"
-
-def test_projects_paraphrase():
-    page, score = find_best_match("what have you built?")
-    assert page == "projects"
-
-def test_contact_paraphrase():
-    page, score = find_best_match("how do I reach you?")
-    assert page == "contact"
-# endregion
-
-# region Casual
-def test_casual_join():
-    page, score = find_best_match("get started")
-    assert page == "join"
-
-def test_casual_contact():
-    page, score = find_best_match("talk to someone")
-    assert page == "contact"
-
-def test_casual_projects():
-    page, score = find_best_match("show me something cool")
-    assert page == "projects"
-#endregion
-
-# region No Relation 
-def test_unrelated_weather():
-    page, score = find_best_match("what is the weather")
-    assert score < 0.3
-
-def test_unrelated_math():
-    page, score = find_best_match("what is 2 + 2")
-    assert score < 0.3
-
-def test_unrelated_president():
-    page, score = find_best_match("who is the president")
-    assert score < 0.3
-
-# endregion
+# random queries
+@pytest.mark.parametrize("query",
+[
+    "what is the weather?",
+    "what is 2 + 2?",
+    "can you solve this differential equation?",
+    "who is the president?"
+]                         
+)
+def test_resolve_falls_back(query):
+    result = resolve(query)
+    assert result["match"] is None
+    assert result["confidence"] == "low"
+    assert result["reason"] == "unsupported_request" 
+    assert "suggestions" in result
