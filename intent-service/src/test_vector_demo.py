@@ -1,8 +1,6 @@
 import pytest
 from vector_demo import resolve
 
-
-
 # matching
 @pytest.mark.parametrize("query,expected",
 [
