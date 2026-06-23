@@ -22,7 +22,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install sentence-transformers scikit-learn numpy pytest
+          pip install sentence-transformers scikit-learn numpy pytest fastapi uvicorn httpx
 
       - name: Run tests
         run: |
