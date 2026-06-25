@@ -1,7 +1,7 @@
 # TMU AIMLA Website
 
 Modern single-page site for TMU AIMLA, built with React, styled-components, and Locomotive Scroll.
-
+ l
 ## Quick Start
 1) Install deps: `npm install`
 2) Run dev server: `npm start`
