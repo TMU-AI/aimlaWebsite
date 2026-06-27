@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TMU AIMLA</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
+      overflow: hidden;
+      background: #05070d;
+    }
+
+    body {
+      position: relative;
+    }
+
+    /* CSS background made to look like the AIMLA Website */
+    .bg {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 52% 22%, rgba(0, 150, 255, 0.18), transparent 28%),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.7)),
+        #05070d;
+      z-index: 0;
+    }
+
+    .bg::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        repeating-linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0.05) 0px,
+          rgba(255, 255, 255, 0.05) 1px,
+          transparent 1px,
+          transparent 36px
+        ),
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.045) 0px,
+          rgba(255, 255, 255, 0.045) 1px,
+          transparent 1px,
+          transparent 36px
+        );
+      transform: perspective(900px) rotateX(67deg) scale(1.4);
+      transform-origin: center top;
+      opacity: 0.17;
+      filter: blur(0.4px);
+    }
+
+    .bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 8% 35%, rgba(0, 225, 255, 0.34) 0 9px, transparent 34px),
+        radial-gradient(circle at 14% 62%, rgba(0, 180, 255, 0.30) 0 10px, transparent 35px),
+        radial-gradient(circle at 26% 28%, rgba(0, 150, 255, 0.28) 0 8px, transparent 32px),
+        radial-gradient(circle at 36% 56%, rgba(0, 200, 255, 0.35) 0 9px, transparent 36px),
+        radial-gradient(circle at 51% 42%, rgba(0, 170, 255, 0.28) 0 10px, transparent 38px),
+        radial-gradient(circle at 64% 68%, rgba(0, 210, 255, 0.31) 0 10px, transparent 38px),
+        radial-gradient(circle at 76% 34%, rgba(0, 150, 255, 0.30) 0 12px, transparent 40px),
+        radial-gradient(circle at 88% 55%, rgba(0, 200, 255, 0.32) 0 11px, transparent 38px),
+        radial-gradient(circle at 95% 75%, rgba(0, 210, 255, 0.30) 0 10px, transparent 38px);
+      filter: blur(14px);
+      opacity: 0.9;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(0,0,0,0.62)),
+        radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.16) 54%, rgba(0,0,0,0.42) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .page {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+    }
+
+    .logo-wrap {
+      position: absolute;
+      top: 28px;
+      left: 36px;
+      z-index: 4;
+    }
+
+    .logo-wrap img {
+      width: 150px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 0 10px rgba(0, 140, 255, 0.18));
+    }
+
+    .right-nav {
+      position: absolute;
+      right: 26px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 4;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 112px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(10, 12, 18, 0.72);
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      backdrop-filter: blur(6px);
+    }
+
+    .nav-btn:hover {
+      background: rgba(20, 40, 70, 0.82);
+      border-color: rgba(120, 190, 255, 0.38);
+      transform: translateX(-2px);
+    }
+
+    .nav-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.85);
+      box-shadow: 0 0 8px rgba(255,255,255,0.28);
+      flex-shrink: 0;
+    }
+
+    .main-content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 70px 20px 30px;
+      text-align: center;
+    }
+
+    .hero-title {
+      font-size: clamp(60px, 7vw, 118px);
+      font-weight: 300;
+      letter-spacing: 8px;
+      margin-top: -110px;
+      margin-bottom: 10px;
+      text-shadow: 0 0 20px rgba(255,255,255,0.15);
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.92);
+      margin-bottom: 26px;
+      text-shadow: 0 0 10px rgba(0,0,0,0.35);
+    }
+
+    .chat-wrapper {
+      width: min(780px, 92vw);
+      background: rgba(8, 12, 20, 0.72);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 22px;
+      backdrop-filter: blur(10px);
+      box-shadow:
+        0 16px 40px rgba(0,0,0,0.4),
+        0 0 25px rgba(0,140,255,0.08);
+      text-align: left;
+    }
+
+    .chat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .chat-header h2 {
+      font-size: 24px;
+      color: #a8dbff;
+    }
+
+    .chat-status {
+      font-size: 13px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      color: #d3eeff;
+      background: rgba(0, 120, 220, 0.14);
+      border: 1px solid rgba(0, 120, 220, 0.28);
+      white-space: nowrap;
+    }
+
+    #streamText {
+      min-height: 180px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 18px;
+      color: #f5f9ff;
+      line-height: 1.75;
+      font-size: 16px;
+      white-space: pre-wrap;
+    }
+
+    .typing-cursor::after {
+      content: "|";
+      display: inline-block;
+      margin-left: 3px;
+      animation: blink 0.8s infinite;
+      color: #7fd0ff;
+      font-weight: bold;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    .input-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    #userInput {
+      flex: 1;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.94);
+      color: #111827;
+      font-size: 15px;
+      outline: none;
+    }
+
+    #userInput::placeholder {
+      color: #6b7280;
+    }
+
+    .send-btn {
+      padding: 14px 20px;
+      border: none;
+      border-radius: 12px;
+      background: #0b8ddb;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .send-btn:hover {
+      background: #0879bd;
+    }
+
+    .suggested {
+      margin-top: 14px;
+      color: #d0ddea;
+      font-size: 14px;
+    }
+
+    .quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .quick-links button {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: white;
+      padding: 10px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.2s ease;
+    }
+
+    .quick-links button:hover {
+      background: rgba(70, 140, 230, 0.18);
+      border-color: rgba(70, 140, 230, 0.3);
+    }
+
+    @media (max-width: 900px) {
+      .right-nav {
+        display: none;
+      }
+
+      .hero-title {
+        font-size: clamp(48px, 11vw, 90px);
+        letter-spacing: 5px;
+        margin-top: -40px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .logo-wrap {
+        top: 18px;
+        left: 18px;
+      }
+
+      .logo-wrap img {
+        width: 105px;
+      }
+
+      .main-content {
+        padding-top: 90px;
+      }
+
+      .hero-title {
+        margin-top: -15px;
+        margin-bottom: 10px;
+      }
+
+      .hero-subtitle {
+        font-size: 15px;
+        margin-bottom: 18px;
+      }
+
+      .chat-wrapper {
+        padding: 16px;
+      }
+
+      .chat-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .input-row {
+        flex-direction: column;
+      }
+
+      .send-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="overlay"></div>
+
+  <div class="page">
+    <div class="logo-wrap">
+      <img src="aimla-logo-cropped.png" alt="TMU AIMLA Logo" />
+    </div>
+
+    <div class="right-nav">
+      <button class="nav-btn" onclick="showPage('home')"><span class="nav-dot"></span> HOME</button>
+      <button class="nav-btn" onclick="showPage('about')"><span class="nav-dot"></span> ABOUT</button>
+      <button class="nav-btn" onclick="showPage('events')"><span class="nav-dot"></span> EVENTS</button>
+      <button class="nav-btn" onclick="showPage('members')"><span class="nav-dot"></span> TEAM</button>
+      <button class="nav-btn" onclick="showPage('join')"><span class="nav-dot"></span> JOIN</button>
+    </div>
+
+    <div class="main-content">
+      <h1 class="hero-title">TMU AIMLA</h1>
+      <p class="hero-subtitle">TMU AI and Machine Learning Association</p>
+
+      <div class="chat-wrapper">
+        <div class="chat-header">
+          <h2>AIMLA Assistant</h2>
+          <div class="chat-status">Text streaming active</div>
+        </div>
+
+        <div id="streamText">Click a quick button or ask a question to test the AIMLA chatbot.</div>
+
+        <div class="input-row">
+          <input id="userInput" type="text" placeholder="Ask about AIMLA, events, projects, or joining..." />
+          <button class="send-btn" onclick="handleUserQuestion()">Send</button>
+        </div>
+
+        <p class="suggested" id="suggestedQuery">Suggested question: What is AIMLA?</p>
+
+        <div class="quick-links" id="quickLinks"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ContentDB = {
+      pages: [
+        {
+          id: "home",
+          title: "Home",
+          keywords: ["home", "welcome", "start"],
+          displayText:
+            "Welcome to TMU AIMLA. This chatbot-style interface lets users explore the club through streamed text responses. You can ask about the club, events, projects, members, and how to join.",
+          suggestedQuery: "What is AIMLA?"
+        },
+        {
+          id: "about",
+          title: "About TMU AIMLA",
+          keywords: ["about", "mission", "club", "aimla", "what is aimla", "what"],
+          displayText:
+            "TMU AIMLA is a student-led association focused on artificial intelligence, machine learning, and hands-on technical learning. The club helps students explore AI tools, build real projects, attend workshops, and gain confidence with modern technology.",
+          suggestedQuery: "What events are upcoming?"
+        },
+        {
+          id: "events",
+          title: "Events and Workshops",
+          keywords: ["events", "event", "workshops", "workshop", "sessions", "upcoming"],
+          displayText:
+            "AIMLA hosts technical workshops, project sessions, networking events, and beginner-friendly learning opportunities. These events are meant to help students understand AI, machine learning, APIs, coding tools, and real-world development workflows.",
+          suggestedQuery: "What kind of projects can I build?"
+        },
+        {
+          id: "projects",
+          title: "Student Projects",
+          keywords: ["projects", "project", "portfolio", "build", "technical", "coding"],
+          displayText:
+            "AIMLA encourages students to build portfolio-ready projects using AI, machine learning, automation, and web development. Project work gives students practical experience and helps them prepare for internships, research, and technical interviews.",
+          suggestedQuery: "How can I join AIMLA?"
+        },
+        {
+          id: "members",
+          title: "Members and Community",
+          keywords: ["members", "team", "community", "students", "people"],
+          displayText:
+            "The AIMLA community brings together students interested in AI, machine learning, software development, research, and technical growth. Members can learn together, collaborate on projects, and support one another.",
+          suggestedQuery: "Do I need experience to join?"
+        },
+        {
+          id: "join",
+          title: "Join AIMLA",
+          keywords: ["join", "member", "signup", "register", "start"],
+          displayText:
+            "Students can join AIMLA by attending events, participating in workshops, joining project teams, and connecting with the club community. No advanced AI experience is required, so beginners are welcome.",
+          suggestedQuery: "What events are good for beginners?"
+        }
+      ]
+    };
+
+    const streamTextElement = document.getElementById("streamText");
+    const suggestedQueryElement = document.getElementById("suggestedQuery");
+    const quickLinksElement = document.getElementById("quickLinks");
+    const userInput = document.getElementById("userInput");
+
+    let currentStream = null;
+
+    function streamText(text, speed = 18) {
+      clearInterval(currentStream);
+      streamTextElement.textContent = "";
+      streamTextElement.classList.add("typing-cursor");
+
+      let index = 0;
+
+      currentStream = setInterval(() => {
+        if (index < text.length) {
+          streamTextElement.textContent += text.charAt(index);
+          index++;
+        } else {
+          clearInterval(currentStream);
+          streamTextElement.classList.remove("typing-cursor");
+        }
+      }, speed);
+    }
+
+    function showPage(pageId) {
+      const page = ContentDB.pages.find(item => item.id === pageId);
+
+      if (!page) {
+        streamText("Sorry, I could not find that page.");
+        suggestedQueryElement.textContent = "Suggested question: What is AIMLA?";
+        return;
+      }
+
+      streamText(page.displayText);
+      suggestedQueryElement.textContent = "Suggested question: " + page.suggestedQuery;
+    }
+
+    function findPageByQuestion(question) {
+      const lowerQuestion = question.toLowerCase();
+
+      return ContentDB.pages.find(page =>
+        page.keywords.some(keyword => lowerQuestion.includes(keyword))
+      );
+    }
+
+    function handleUserQuestion() {
+      const question = userInput.value.trim();
+
+      if (question === "") {
+        streamText("Please type a question first.");
+        return;
+      }
+
+      const matchedPage = findPageByQuestion(question);
+
+      if (matchedPage) {
+        streamText(matchedPage.displayText);
+        suggestedQueryElement.textContent = "Suggested question: " + matchedPage.suggestedQuery;
+      } else {
+        streamText("I am not sure about that yet. Try asking about AIMLA, events, projects, members, or how to join.");
+        suggestedQueryElement.textContent = "Suggested question: What is AIMLA?";
+      }
+
+      userInput.value = "";
+    }
+
+    function loadQuickLinks() {
+      const quickPages = ["about", "events", "projects", "join"];
+
+      quickPages.forEach(id => {
+        const page = ContentDB.pages.find(item => item.id === id);
+        if (!page) return;
+
+        const button = document.createElement("button");
+        button.textContent = page.title;
+        button.onclick = () => showPage(page.id);
+        quickLinksElement.appendChild(button);
+      });
+    }
+
+    userInput.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        handleUserQuestion();
+      }
+    });
+
+    loadQuickLinks();
+  </script>
+</body>
+</html>
