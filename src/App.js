@@ -1,17 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
 import styled, { ThemeProvider, keyframes } from "styled-components";
 
 import GlobalStyles from "./styles/GlobalStyles";
 import { dark } from "./styles/Themes";
 import Logo from "./components/Logo";
-import {
-  DEFAULT_TOPIC_ID,
-  FALLBACK_MESSAGE,
-  QUICK_PROMPTS,
-  NAV_ITEMS,
-  getTopic,
-  resolveTopic
-} from "./content/homepage";
+import { NAV_ITEMS, QUICK_PROMPTS } from "./app/routes";
+import { APP_SUBTITLE, APP_TITLE } from "./app/shell";
+import { useResolvedDestination } from "./hooks/useResolvedDestination";
 
 const drift = keyframes`
   0%, 100% { transform: translate3d(0, 0, 0); }
@@ -347,63 +341,16 @@ const QuickButton = styled.button`
 `;
 
 function App() {
-  const [activeTopicId, setActiveTopicId] = useState(DEFAULT_TOPIC_ID);
-  const [inputValue, setInputValue] = useState("");
-  const [suggestedQuery, setSuggestedQuery] = useState(getTopic(DEFAULT_TOPIC_ID).suggestedQuery);
-  const [fullMessage, setFullMessage] = useState(getTopic(DEFAULT_TOPIC_ID).body);
-  const [visibleMessage, setVisibleMessage] = useState("");
-  const [isStreaming, setIsStreaming] = useState(true);
-  const [streamKey, setStreamKey] = useState(0);
-
-  const activeTopic = useMemo(() => getTopic(activeTopicId), [activeTopicId]);
-
-  useEffect(() => {
-    let index = 0;
-    const message = fullMessage;
-
-    setVisibleMessage("");
-    setIsStreaming(true);
-
-    const timer = window.setInterval(() => {
-      index += 1;
-
-      if (index <= message.length) {
-        setVisibleMessage(message.slice(0, index));
-        return;
-      }
-
-      window.clearInterval(timer);
-      setIsStreaming(false);
-    }, 18);
-
-    return () => window.clearInterval(timer);
-  }, [fullMessage, streamKey]);
-
-  const pushTopic = topicId => {
-    const topic = getTopic(topicId);
-
-    setActiveTopicId(topic.id);
-    setSuggestedQuery(topic.suggestedQuery);
-    setFullMessage(topic.body);
-    setStreamKey(value => value + 1);
-  };
-
-  const handleSubmit = event => {
-    event.preventDefault();
-
-    const topic = resolveTopic(inputValue);
-
-    if (topic) {
-      pushTopic(topic.id);
-    } else {
-      setActiveTopicId(DEFAULT_TOPIC_ID);
-      setSuggestedQuery(getTopic(DEFAULT_TOPIC_ID).suggestedQuery);
-      setFullMessage(FALLBACK_MESSAGE);
-      setStreamKey(value => value + 1);
-    }
-
-    setInputValue("");
-  };
+  const {
+    activeDestination,
+    inputValue,
+    isStreaming,
+    pushDestination,
+    handleSubmit,
+    setInputValue,
+    suggestedQuery,
+    visibleMessage
+  } = useResolvedDestination();
 
   return (
     <ThemeProvider theme={dark}>
@@ -417,8 +364,8 @@ function App() {
 
           <SideNav aria-label="AIMLA sections">
             {NAV_ITEMS.map(item => (
-              <NavButton key={item.id} type="button" $active={item.id === activeTopic.id} onClick={() => pushTopic(item.id)}>
-                <NavDot $active={item.id === activeTopic.id} />
+              <NavButton key={item.id} type="button" $active={item.id === activeDestination.id} onClick={() => pushDestination(item.id)}>
+                <NavDot $active={item.id === activeDestination.id} />
                 {item.label}
               </NavButton>
             ))}
@@ -426,14 +373,14 @@ function App() {
 
           <Canvas>
             <Hero>
-              <Title>TMU AIMLA</Title>
-              <Subtitle>TMU AI and Machine Learning Association</Subtitle>
+              <Title>{APP_TITLE}</Title>
+              <Subtitle>{APP_SUBTITLE}</Subtitle>
 
               <Panel aria-label="AIMLA assistant panel">
                 <PanelHeader>
                   <div>
                     <PanelTitle>AIMLA Assistant</PanelTitle>
-                    <PanelTopic>{activeTopic.title}</PanelTopic>
+                    <PanelTopic>{activeDestination.title}</PanelTopic>
                   </div>
                   <Status>
                     <StatusDot $active={isStreaming} />
@@ -461,7 +408,7 @@ function App() {
 
                 <QuickLinks aria-label="Quick prompts">
                   {QUICK_PROMPTS.map(prompt => (
-                    <QuickButton key={prompt.label} type="button" onClick={() => pushTopic(prompt.topicId)}>
+                    <QuickButton key={prompt.label} type="button" onClick={() => pushDestination(prompt.destinationId)}>
                       {prompt.label}
                     </QuickButton>
                   ))}
