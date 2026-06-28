@@ -16,6 +16,13 @@ The codebase is organized around a thin app shell, a deterministic resolver laye
 - `src/sections/`: legacy scroll-based page sections kept as reference modules.
 - `src/resolver/resolver.js`: experimental ML resolver prototype, not used by the main app.
 
+## Instructions for Development
+
+- On a fresh checkout, run `npm install` once.
+- Run `npm start` to launch the CRA dev server.
+- Save files to see resolver, content, hook, component, and app-shell changes hot-reload in the browser.
+- Resolver and streaming logic are already wired into the main webapp through `src/hooks/useResolvedDestination.js` and `src/App.js`.
+
 ## Ownership Split
 
 - Gab: resolver logic in `src/resolver/`
@@ -29,6 +36,15 @@ App -> hook -> resolver + content
 App -> app/routes + app/shell
 App -> components/styles
 ```
+
+## Files To Touch For Feature Work
+
+- Resolver / intent matching: `src/resolver/normalizeInput.js`, `src/resolver/matchDestination.js`, `src/resolver/aliases.js`, `src/resolver/index.js`, `src/resolver/index.test.js`
+- Content / copy updates: `src/content/index.js`, `src/content/homepage.js`, `src/content/schema.js`, and destination modules under `src/content/destinations/`
+- Streaming / state behavior: `src/hooks/useResolvedDestination.js`
+- UI layout / refinement: `src/App.js`, `src/components/`, `src/styles/`
+- App-level routes and shell constants: `src/app/`
+- Legacy scroll-based reference work only if intentionally migrating old behavior: `src/sections/` and `src/resolver/resolver.js`
 
 ## Junior Rules
 
