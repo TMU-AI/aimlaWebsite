@@ -1,0 +1,44 @@
+# Repo Layout Summary
+
+## Overview
+
+The codebase is organized around a thin app shell, a deterministic resolver layer, and canonical content modules.
+
+## Main Areas
+
+- `src/resolver/`: resolver logic only. This is where normalization, aliasing, and destination matching live.
+- `src/content/`: destination data only. This holds the canonical text, labels, IDs, fallback copy, and content registry.
+- `src/hooks/`: wiring between resolver output, streaming state, and UI behavior.
+- `src/app/`: app-level shell constants and route/configuration data.
+- `src/components/`: presentational UI components.
+- `src/styles/`: global styles and theme tokens.
+- `src/App.js`: thin composition layer that connects everything.
+- `src/sections/`: legacy scroll-based page sections kept as reference modules.
+- `src/resolver/resolver.js`: experimental ML resolver prototype, not used by the main app.
+
+## Ownership Split
+
+- Gab: resolver logic in `src/resolver/`
+- Derrick: text streaming and content retrieval in `src/hooks/` and `src/content/`
+- The legacy prototype files under `src/resolver/` and `src/sections/` should be treated as reference/transition code unless explicitly re-integrated.
+
+## Dependency Flow
+
+```text
+App -> hook -> resolver + content
+App -> app/routes + app/shell
+App -> components/styles
+```
+
+## Junior Rules
+
+- Matching changes go in `src/resolver/`.
+- Text/content changes go in `src/content/`.
+- Streaming/state changes go in `src/hooks/`.
+- Layout changes go in `src/components/` or the wiring in `src/App.js`.
+- Prototype or legacy scroll-section changes should stay isolated unless the team chooses to migrate them back into the main app.
+
+## Documentation Note
+
+- Top-of-file docstrings were added across `src/` to make module purpose obvious at a glance.
+- These comments are meant to model good documentation practice for juniors and to reinforce the boundary between resolver, content, hook, and UI modules.
