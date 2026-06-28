@@ -11,23 +11,11 @@ This work should stay deterministic, testable, and separate from UI or content r
 - Keep matching logic isolated from presentation and streaming.
 - Prefer small, composable helper functions.
 
-## Contract
-### `clean_input_text(input_text: str) -> str`
-- Input: raw user text.
-- Output: cleaned text ready for matching.
-- Expected behavior:
-  - trim whitespace
-  - normalize casing
-  - remove punctuation or other matching noise
-  - avoid side effects
-
-### `map_input_to_page_dest(cleaned_text: str, page_destinations: dict) -> str | None`
-- Input: cleaned text and a destination lookup structure.
-- Output: a page ID string or `None` when no match is good enough.
-- Expected behavior:
-  - compare against destination names, aliases, or descriptions
-  - stay deterministic when possible
-  - return the same result for the same input
+## Current Implementation
+- `src/resolver/normalizeInput.js` owns raw-text normalization.
+- `src/resolver/matchDestination.js` owns destination matching and returns `{ match, confidence, reason, suggestions }`.
+- `src/resolver/index.js` exposes the public `resolveDestination()` entry point.
+- Keep these behaviors stable unless the resolver contract itself is being intentionally changed.
 
 ## Files to Modify
 - `src/resolver/normalizeInput.js`

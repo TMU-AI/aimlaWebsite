@@ -11,22 +11,11 @@ This work should stay focused on content retrieval, tokenization, and presentati
 - Stream content in a way that supports the UI.
 - Keep content handling separate from resolver logic.
 
-## Contract
-### `tokenize_text(input_text: str) -> string[]`
-- Input: a text string.
-- Output: an ordered list of tokens.
-- Expected behavior:
-  - split text predictably
-  - preserve a useful reading order
-  - avoid mutating the source text
-
-### `stream_text_tokens(input_tokens: string[], delay: int) -> None`
-- Input: token list and delay in milliseconds.
-- Output: none.
-- Expected behavior:
-  - emit tokens one at a time
-  - keep streaming behavior isolated from resolver logic
-  - support later UI integration without changing the contract
+## Current Implementation
+- `src/content/index.js` owns canonical destination data and lookup helpers.
+- `src/hooks/useResolvedDestination.js` owns the typewriter-style streaming behavior and destination switching.
+- `src/content/homepage.js` bridges resolver output to topic/content selection.
+- Keep content lookup and streaming concerns inside this layer unless the architecture changes.
 
 ## Files to Modify
 - `src/content/index.js`
