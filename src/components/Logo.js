@@ -1,3 +1,7 @@
+/**
+ * AIMLA logo component.
+ * Renders the brand mark with a small entrance animation.
+ */
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import AIMLAlogo from '../assets/Images/AIMLAlogo.png'

@@ -1,3 +1,7 @@
+/**
+ * Standalone resolver prototype smoke test.
+ * Exercises the experimental ML resolver against a small query set.
+ */
 import { resolve } from "./resolver.js";
 
 const testCases = [

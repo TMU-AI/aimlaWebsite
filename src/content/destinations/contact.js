@@ -1,3 +1,7 @@
+/**
+ * Contact destination content.
+ * Provides the fallback contact path for the team.
+ */
 const contact = {
   id: "contact",
   label: "Contact",

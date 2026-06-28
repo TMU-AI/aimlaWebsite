@@ -1,3 +1,7 @@
+/**
+ * Destination resolution and streaming state hook.
+ * Coordinates input handling, resolver output, and typewriter-style message playback.
+ */
 import { useEffect, useMemo, useState } from "react";
 
 import { DEFAULT_DESTINATION_ID, FALLBACK_MESSAGE, getDestinationContent } from "../content";

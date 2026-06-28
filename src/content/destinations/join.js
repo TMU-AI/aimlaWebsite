@@ -1,3 +1,7 @@
+/**
+ * Join destination content.
+ * Explains how students can get involved with AIMLA.
+ */
 const join = {
   id: "join",
   label: "Join",

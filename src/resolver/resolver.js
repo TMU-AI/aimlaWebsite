@@ -1,3 +1,7 @@
+/**
+ * Experimental ML-backed resolver prototype.
+ * Kept separate from the deterministic MVP resolver used by the app.
+ */
 import { pipeline } from "@xenova/transformers";
 
 const pages = {

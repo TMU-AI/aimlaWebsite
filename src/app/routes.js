@@ -1,3 +1,7 @@
+/**
+ * App navigation and quick prompt config.
+ * Converts canonical destination content into UI-facing nav items.
+ */
 import { getDestinationContent } from "../content";
 
 const NAV_DESTINATION_IDS = ["about", "events", "members", "join"];

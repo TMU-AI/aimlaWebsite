@@ -1,3 +1,7 @@
+/**
+ * Main AIMLA application shell.
+ * Wires the visual layout, destination navigation, and streamed response panel together.
+ */
 import styled, { ThemeProvider, keyframes } from "styled-components";
 
 import GlobalStyles from "./styles/GlobalStyles";

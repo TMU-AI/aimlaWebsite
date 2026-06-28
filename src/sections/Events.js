@@ -1,3 +1,7 @@
+/**
+ * Legacy events section.
+ * Presents event cards for the older scroll-driven AIMLA site.
+ */
 //Import all the pictures here and put the name accordingly please
 
 import React, { useState } from "react";

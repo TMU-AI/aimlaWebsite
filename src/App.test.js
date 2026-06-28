@@ -1,3 +1,7 @@
+/**
+ * App smoke test.
+ * Verifies the main shell renders the expected AIMLA headings.
+ */
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import App from './App';

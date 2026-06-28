@@ -1,3 +1,7 @@
+/**
+ * Canonical destination registry.
+ * Owns destination modules, validation, and lookup helpers for page content.
+ */
 import { validateDestinationContent } from "./schema";
 import about from "./destinations/about";
 import events from "./destinations/events";

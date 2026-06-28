@@ -1,3 +1,7 @@
+/**
+ * Events destination content.
+ * Explains workshops, sessions, and club events.
+ */
 const events = {
   id: "events",
   label: "Events",

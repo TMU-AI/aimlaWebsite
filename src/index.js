@@ -1,3 +1,7 @@
+/**
+ * CRA bootstrap entrypoint.
+ * Mounts the React app into the root DOM node.
+ */
 import React from 'react';
 import ReactDOM from 'react-dom';
 

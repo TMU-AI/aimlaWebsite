@@ -1,3 +1,7 @@
+/**
+ * Resolver public API.
+ * Re-exports the matching helpers and exposes the top-level destination resolver.
+ */
 import { normalizeInput } from "./normalizeInput.js";
 import { matchDestination } from "./matchDestination.js";
 

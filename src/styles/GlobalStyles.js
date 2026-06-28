@@ -1,3 +1,7 @@
+/**
+ * Global style reset and base theme surface.
+ * Defines app-wide fonts, overflow handling, and root layout defaults.
+ */
 import { createGlobalStyle } from "styled-components";
 import "@fontsource/kaushan-script";
 import "@fontsource/sirin-stencil";

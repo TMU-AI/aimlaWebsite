@@ -1,3 +1,7 @@
+/**
+ * Destination content validation helpers.
+ * Ensures every destination has the fields the UI expects.
+ */
 const REQUIRED_FIELDS = ["id", "label", "title", "body", "suggestedQuery"];
 
 export function validateDestinationContent(destination) {

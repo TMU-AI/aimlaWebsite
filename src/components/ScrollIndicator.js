@@ -1,3 +1,7 @@
+/**
+ * Scroll position indicator.
+ * Shows section markers and keeps navigation tied to the page scroll state.
+ */
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import styled from "styled-components";
 import { useLocomotiveScroll } from "react-locomotive-scroll";

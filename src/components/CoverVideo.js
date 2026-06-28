@@ -1,3 +1,7 @@
+/**
+ * Legacy hero cover video section.
+ * Handles the fullscreen background video and overlay title treatment.
+ */
 import React, { useMemo } from 'react';
 import styled, { keyframes } from 'styled-components';
 import MainVideo from '../assets/background.mp4';

@@ -1,3 +1,7 @@
+/**
+ * Projects destination content.
+ * Describes the kinds of student projects AIMLA encourages.
+ */
 const projects = {
   id: "projects",
   label: "Projects",

@@ -1,3 +1,7 @@
+/**
+ * About destination content.
+ * Describes the club mission and what AIMLA offers.
+ */
 const about = {
   id: "about",
   label: "About",

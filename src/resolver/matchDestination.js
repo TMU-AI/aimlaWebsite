@@ -1,3 +1,7 @@
+/**
+ * Destination matcher.
+ * Compares normalized user text against the allowlisted alias sets.
+ */
 import { DESTINATION_ALIASES, DESTINATION_IDS } from "./aliases.js";
 import { normalizeInput } from "./normalizeInput.js";
 

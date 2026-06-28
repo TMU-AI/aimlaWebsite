@@ -1,3 +1,7 @@
+/**
+ * Resolver alias tables.
+ * Lists supported destination IDs and the phrases that map to each one.
+ */
 export const DESTINATION_IDS = Object.freeze(["about", "events", "projects", "members", "join", "contact"]);
 
 export const DESTINATION_ALIASES = Object.freeze({

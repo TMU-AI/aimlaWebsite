@@ -1,3 +1,7 @@
+/**
+ * Members destination content.
+ * Summarizes the AIMLA community and collaboration culture.
+ */
 const members = {
   id: "members",
   label: "Members",

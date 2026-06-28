@@ -1,3 +1,7 @@
+/**
+ * Legacy team section.
+ * Displays executive and member cards for the older AIMLA homepage.
+ */
 import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
