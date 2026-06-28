@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components'
 import AIMLAlogo from '../assets/Images/AIMLAlogo.png'
 
@@ -10,10 +9,9 @@ const fadeIn = keyframes`
 
 
 const Container = styled.div`
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const LogoImg = styled.img`
@@ -38,9 +36,7 @@ const LogoImg = styled.img`
 const Logo = () => {
   return (
     <Container>
-        <Link to='/' aria-label="AIMLA Home">
-            <LogoImg src={AIMLAlogo} alt="AIMLAlogo" />
-        </Link>
+      <LogoImg src={AIMLAlogo} alt="TMU AIMLA logo" />
     </Container>
   )
 }
