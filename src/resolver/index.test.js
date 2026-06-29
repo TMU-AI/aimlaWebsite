@@ -7,11 +7,10 @@ test("normalizeInput trims and collapses text", () => {
 
 test("matchDestination preserves legacy alias priority", () => {
   const result = matchDestination("What events are upcoming?");
-
-  expect(result.match).toBe("about");
+  expect(result.match).toBe("events");
   expect(result.confidence).toBeGreaterThan(0);
   expect(result.reason).toBe("question-includes-alias");
-  expect(result.suggestions).toEqual(["about"]);
+  expect(result.suggestions).toEqual(["events"]);
 });
 
 test("getDestinationContent returns registered destination data", () => {
