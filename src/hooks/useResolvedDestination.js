@@ -1,19 +1,52 @@
 /**
  * Destination resolution and streaming state hook.
- * Coordinates input handling, resolver output, and typewriter-style message playback.
+ * Coordinates input handling, resolved destination IDs, and typewriter-style message playback.
  */
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
-import { DEFAULT_DESTINATION_ID, FALLBACK_MESSAGE, getDestinationContent } from "../content";
+import {
+  DEFAULT_DESTINATION_ID,
+  FALLBACK_MESSAGE,
+  getDestinationContent,
+  getDestinationContentOrDefault,
+} from "../content";
 import { resolveDestination } from "../resolver";
 
-const DEFAULT_DESTINATION = getDestinationContent(DEFAULT_DESTINATION_ID);
+const DEFAULT_DESTINATION = getDestinationContentOrDefault(DEFAULT_DESTINATION_ID);
+
+const STREAM_SPEED_MS = 24;
+
+/**
+ * Splits text into streamable tokens while preserving:
+ * - spaces
+ * - line breaks
+ * - punctuation
+ *
+ * This prevents streamed text from looking cramped.
+ */
+export function tokenizeForStreaming(text) {
+  if (!text) {
+    return [];
+  }
+
+  return String(text).match(/\n+|[^\S\n]+|[\w'-]+|[^\s]/g) || [];
+}
+
+function getDestinationMessage(destination) {
+  return destination.content || destination.body || "";
+}
 
 export function useResolvedDestination() {
-  const [activeDestinationId, setActiveDestinationId] = useState(DEFAULT_DESTINATION_ID);
+  const [activeDestinationId, setActiveDestinationId] = useState(
+    DEFAULT_DESTINATION_ID
+  );
   const [inputValue, setInputValue] = useState("");
-  const [suggestedQuery, setSuggestedQuery] = useState(DEFAULT_DESTINATION.suggestedQuery);
-  const [fullMessage, setFullMessage] = useState(DEFAULT_DESTINATION.body);
+  const [suggestedQuery, setSuggestedQuery] = useState(
+    DEFAULT_DESTINATION.suggestedQuery
+  );
+  const [fullMessage, setFullMessage] = useState(
+    getDestinationMessage(DEFAULT_DESTINATION)
+  );
   const [visibleMessage, setVisibleMessage] = useState("");
   const [isStreaming, setIsStreaming] = useState(true);
   const [streamKey, setStreamKey] = useState(0);
@@ -23,62 +56,95 @@ export function useResolvedDestination() {
     [activeDestinationId]
   );
 
+  const messageTokens = useMemo(
+    () => tokenizeForStreaming(fullMessage),
+    [fullMessage]
+  );
+
   useEffect(() => {
-    let index = 0;
-    const message = fullMessage;
+    let tokenIndex = 0;
+    let timeoutId;
+    let cancelled = false;
+
+    const tokens = messageTokens;
 
     setVisibleMessage("");
+
+    if (tokens.length === 0) {
+      setIsStreaming(false);
+      return undefined;
+    }
+
     setIsStreaming(true);
 
-    const timer = window.setInterval(() => {
-      index += 1;
-
-      if (index <= message.length) {
-        setVisibleMessage(message.slice(0, index));
+    const streamNextToken = () => {
+      if (cancelled) {
         return;
       }
 
-      window.clearInterval(timer);
-      setIsStreaming(false);
-    }, 18);
+      tokenIndex += 1;
 
-    return () => window.clearInterval(timer);
-  }, [fullMessage, streamKey]);
+      setVisibleMessage(tokens.slice(0, tokenIndex).join(""));
 
-  const pushDestination = destinationId => {
-    const destination = getDestinationContent(destinationId) || DEFAULT_DESTINATION;
+      if (tokenIndex >= tokens.length) {
+        setIsStreaming(false);
+        return;
+      }
+
+      timeoutId = window.setTimeout(streamNextToken, STREAM_SPEED_MS);
+    };
+
+    timeoutId = window.setTimeout(streamNextToken, STREAM_SPEED_MS);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timeoutId);
+    };
+  }, [messageTokens, streamKey]);
+
+  const pushDestination = useCallback((destinationId) => {
+    const destination = getDestinationContentOrDefault(destinationId);
 
     setActiveDestinationId(destination.id);
     setSuggestedQuery(destination.suggestedQuery);
-    setFullMessage(destination.body);
-    setStreamKey(value => value + 1);
-  };
+    setFullMessage(getDestinationMessage(destination));
+    setStreamKey((value) => value + 1);
+  }, []);
 
-  const handleSubmit = event => {
-    event.preventDefault();
+  const pushFallbackMessage = useCallback(() => {
+    setActiveDestinationId(DEFAULT_DESTINATION_ID);
+    setSuggestedQuery(DEFAULT_DESTINATION.suggestedQuery);
+    setFullMessage(FALLBACK_MESSAGE);
+    setStreamKey((value) => value + 1);
+  }, []);
 
-    const { match } = resolveDestination(inputValue);
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
 
-    if (match) {
-      pushDestination(match);
-    } else {
-      setActiveDestinationId(DEFAULT_DESTINATION_ID);
-      setSuggestedQuery(DEFAULT_DESTINATION.suggestedQuery);
-      setFullMessage(FALLBACK_MESSAGE);
-      setStreamKey(value => value + 1);
-    }
+      const { match } = resolveDestination(inputValue);
 
-    setInputValue("");
-  };
+      if (match) {
+        pushDestination(match);
+      } else {
+        pushFallbackMessage();
+      }
+
+      setInputValue("");
+    },
+    [inputValue, pushDestination, pushFallbackMessage]
+  );
 
   return {
     activeDestination,
+    activeDestinationId,
+    fullMessage,
     inputValue,
     isStreaming,
     pushDestination,
     handleSubmit,
     setInputValue,
     suggestedQuery,
-    visibleMessage
+    visibleMessage,
   };
 }
