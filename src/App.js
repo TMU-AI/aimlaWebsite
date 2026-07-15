@@ -122,8 +122,10 @@ const NavButton = styled.button`
   min-width: 7rem;
   padding: 0.65rem 0.9rem;
   border-radius: 999px;
-  border: 1px solid ${props => (props.$active ? "rgba(120, 190, 255, 0.38)" : "rgba(255, 255, 255, 0.14)")};
-  background: ${props => (props.$active ? "rgba(20, 40, 70, 0.82)" : "rgba(10, 12, 18, 0.72)")};
+  border: 1px solid ${(props) =>
+    props.$active ? "rgba(120, 190, 255, 0.38)" : "rgba(255, 255, 255, 0.14)"};
+  background: ${(props) =>
+    props.$active ? "rgba(20, 40, 70, 0.82)" : "rgba(10, 12, 18, 0.72)"};
   color: #fff;
   font: inherit;
   font-size: 0.95rem;
@@ -144,7 +146,7 @@ const NavDot = styled.span`
   width: 0.65rem;
   height: 0.65rem;
   border-radius: 999px;
-  background: ${props => (props.$active ? "#7fd0ff" : "rgba(255, 255, 255, 0.85)")};
+  background: ${(props) => (props.$active ? "#7fd0ff" : "rgba(255, 255, 255, 0.85)")};
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.28);
   flex-shrink: 0;
 `;
@@ -242,7 +244,7 @@ const StatusDot = styled.span`
   width: 0.45rem;
   height: 0.45rem;
   border-radius: 999px;
-  background: ${props => (props.$active ? "#66f0ff" : "#9cc9ff")};
+  background: ${(props) => (props.$active ? "#66f0ff" : "#9cc9ff")};
   box-shadow: 0 0 8px rgba(102, 240, 255, 0.4);
 `;
 
@@ -265,8 +267,13 @@ const Cursor = styled.span`
   animation: blink 0.8s infinite;
 
   @keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
+    0%, 50% {
+      opacity: 1;
+    }
+
+    51%, 100% {
+      opacity: 0;
+    }
   }
 `;
 
@@ -306,11 +313,16 @@ const SendButton = styled.button`
   font: inherit;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: background 180ms ease;
+  transition: background 180ms ease, opacity 180ms ease;
   white-space: nowrap;
 
   &:hover {
     background: #0879bd;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
   }
 `;
 
@@ -347,14 +359,18 @@ const QuickButton = styled.button`
 function App() {
   const {
     activeDestination,
+    activeDestinationId,
     inputValue,
     isStreaming,
     pushDestination,
     handleSubmit,
     setInputValue,
     suggestedQuery,
-    visibleMessage
+    visibleMessage,
   } = useResolvedDestination();
+
+  const currentDestinationId = activeDestinationId || activeDestination?.id;
+  const canSubmit = inputValue.trim().length > 0;
 
   return (
     <ThemeProvider theme={dark}>
@@ -367,12 +383,21 @@ function App() {
           </BrandRow>
 
           <SideNav aria-label="AIMLA sections">
-            {NAV_ITEMS.map(item => (
-              <NavButton key={item.id} type="button" $active={item.id === activeDestination.id} onClick={() => pushDestination(item.id)}>
-                <NavDot $active={item.id === activeDestination.id} />
-                {item.label}
-              </NavButton>
-            ))}
+            {NAV_ITEMS.map((item) => {
+              const isActive = item.id === currentDestinationId;
+
+              return (
+                <NavButton
+                  key={item.id}
+                  type="button"
+                  $active={isActive}
+                  onClick={() => pushDestination(item.id)}
+                >
+                  <NavDot $active={isActive} />
+                  {item.label}
+                </NavButton>
+              );
+            })}
           </SideNav>
 
           <Canvas>
@@ -384,15 +409,16 @@ function App() {
                 <PanelHeader>
                   <div>
                     <PanelTitle>AIMLA Assistant</PanelTitle>
-                    <PanelTopic>{activeDestination.title}</PanelTopic>
+                    <PanelTopic>{activeDestination?.title || "AIMLA"}</PanelTopic>
                   </div>
+
                   <Status>
                     <StatusDot $active={isStreaming} />
                     {isStreaming ? "Text streaming active" : "Ready"}
                   </Status>
                 </PanelHeader>
 
-                <StreamBox>
+                <StreamBox aria-live="polite" aria-busy={isStreaming}>
                   {visibleMessage}
                   {isStreaming ? <Cursor>|</Cursor> : null}
                 </StreamBox>
@@ -401,18 +427,27 @@ function App() {
                   <TextInput
                     type="text"
                     value={inputValue}
-                    onChange={event => setInputValue(event.target.value)}
-                    placeholder="Ask about AIMLA, events, projects, or joining..."
+                    onChange={(event) => setInputValue(event.target.value)}
+                    placeholder="Ask about AIMLA, events, projects, members, joining, or contact..."
                     aria-label="Ask AIMLA a question"
                   />
-                  <SendButton type="submit">Send</SendButton>
+
+                  <SendButton type="submit" disabled={!canSubmit}>
+                    Send
+                  </SendButton>
                 </InputRow>
 
-                <Suggested>Suggested question: {suggestedQuery}</Suggested>
+                {suggestedQuery ? (
+                  <Suggested>Suggested question: {suggestedQuery}</Suggested>
+                ) : null}
 
                 <QuickLinks aria-label="Quick prompts">
-                  {QUICK_PROMPTS.map(prompt => (
-                    <QuickButton key={prompt.label} type="button" onClick={() => pushDestination(prompt.destinationId)}>
+                  {QUICK_PROMPTS.map((prompt) => (
+                    <QuickButton
+                      key={`${prompt.label}-${prompt.destinationId}`}
+                      type="button"
+                      onClick={() => pushDestination(prompt.destinationId)}
+                    >
                       {prompt.label}
                     </QuickButton>
                   ))}

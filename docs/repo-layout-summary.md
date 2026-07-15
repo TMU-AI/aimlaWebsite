@@ -2,7 +2,7 @@
 
 ## Instructions from Oliver
 
-- Feature work can be done directly on the release branch now. Commit your changes every time you feel you've made a change worth documenting (kind of like a save state in a video game), and push your changes to the repo at the end of every work session, but NEVER push any changes that causes errors. 
+- Feature work can be done directly on the release branch now. Commit your changes every time you feel you've made a change worth documenting (kind of like a save state in a video game), and push your changes to the repo at the end of every work session, but NEVER push any changes that causes errors (if you do, just fix it in a future commit. Don't undo any commits for now since those require great care). 
 - We're gonna practice collaborative coding now and working in an environment where your code affects other people. It might get messy if you modify the same files and fail to pull those changes before you start (this is where merge conflicts occur). 
 - But since I've modularized the codebase and given you guys strictly separate functionalities to work on, it shouldn't be a problem. 
 - This will teach you guys the importance of good version control practices now that your code will be interacting. It will also hopefully motivate CI/CD workflows (continuous testing), which is supposed to help mitigate merge conflicts.

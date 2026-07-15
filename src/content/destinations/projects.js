@@ -8,7 +8,8 @@ const projects = {
   title: "Student Projects",
   body:
     "AIMLA encourages students to build portfolio-ready projects using AI, machine learning, automation, and web development. Project work gives students practical experience and helps them prepare for internships, research, and technical interviews.",
-  suggestedQuery: "How can I join AIMLA?"
+  suggestedQuery: "How can I join AIMLA?",
+  aliases: ["projects", "student projects", "portfolio projects", "ai projects", "machine learning projects"],
 };
 
 export default projects;
