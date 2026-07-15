@@ -5,7 +5,7 @@
 export const DESTINATION_IDS = Object.freeze(["about", "events", "projects", "members", "join", "contact"]);
 
 export const DESTINATION_ALIASES = Object.freeze({
-  about: ["about", "mission", "club", "aimla", "what is aimla", "who are you", "tell me about", "what do you do","about aimla", "overview", "who is aimla", "what is this club", "tell me more"],
+  about: ["mission", "club", "aimla", "what is aimla", "who are you", "tell me about", "what do you do","about aimla", "overview", "who is aimla", "what is this club", "tell me more"],
   events: ["events", "event", "workshops", "workshop", "sessions", "upcoming", "hackathon", "meetup", "what events","next event", "past events", "what is happening", "schedule", "calendar", "any events", "talks", "speaker"],
   projects: ["projects", "project", "portfolio", "build", "technical", "coding", "what have you built", "what do you build", "what are you building", "show me your work", "what did you make", "ai projects", "ml projects"],
   members: ["members", "team", "community", "students", "people", "executives", "contributors", "who runs this", "who is on the team", "leadership", "who are the members", "board", "execs", "staff"],
