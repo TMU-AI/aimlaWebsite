@@ -24,3 +24,4 @@ yarn-error.log*
 
 .kilo/
 ai-native-website-architecture.md
+.env
