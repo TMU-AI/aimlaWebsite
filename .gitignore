@@ -24,3 +24,9 @@ yarn-error.log*
 
 .kilo/
 ai-native-website-architecture.md
+
+# python
+venv/
+.venv/
+__pycache__/
+*.pyc
