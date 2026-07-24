@@ -24,9 +24,13 @@ yarn-error.log*
 
 .kilo/
 ai-native-website-architecture.md
+<<<<<<< HEAD
 
 # python
 venv/
 .venv/
 __pycache__/
 *.pyc
+=======
+.env
+>>>>>>> 3a367292d10e48c0ee355bbd31a50906fe558178

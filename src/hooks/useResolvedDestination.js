@@ -11,6 +11,7 @@ import {
   getDestinationContentOrDefault,
 } from "../content";
 import { resolveDestination } from "../resolver";
+import { rewriteMessageWithLLM } from "../utils/rewriteMessage";
 
 const DEFAULT_DESTINATION = getDestinationContentOrDefault(DEFAULT_DESTINATION_ID);
 
@@ -56,51 +57,55 @@ export function useResolvedDestination() {
     [activeDestinationId]
   );
 
-  const messageTokens = useMemo(
-    () => tokenizeForStreaming(fullMessage),
-    [fullMessage]
-  );
-
   useEffect(() => {
     let tokenIndex = 0;
     let timeoutId;
     let cancelled = false;
 
-    const tokens = messageTokens;
+    const streamMessage = async () => {
+      setVisibleMessage("");
+      setIsStreaming(true);
 
-    setVisibleMessage("");
+      const messageToStream = await rewriteMessageWithLLM(fullMessage, "rewrite");
 
-    if (tokens.length === 0) {
-      setIsStreaming(false);
-      return undefined;
-    }
-
-    setIsStreaming(true);
-
-    const streamNextToken = () => {
       if (cancelled) {
         return;
       }
 
-      tokenIndex += 1;
+      const tokens = tokenizeForStreaming(messageToStream);
 
-      setVisibleMessage(tokens.slice(0, tokenIndex).join(""));
-
-      if (tokenIndex >= tokens.length) {
+      if (tokens.length === 0) {
         setIsStreaming(false);
         return;
       }
 
+      const streamNextToken = () => {
+        if (cancelled) {
+          return;
+        }
+
+        tokenIndex += 1;
+
+        setVisibleMessage(tokens.slice(0, tokenIndex).join(""));
+
+        if (tokenIndex >= tokens.length) {
+          setIsStreaming(false);
+          return;
+        }
+
+        timeoutId = window.setTimeout(streamNextToken, STREAM_SPEED_MS);
+      };
+
       timeoutId = window.setTimeout(streamNextToken, STREAM_SPEED_MS);
     };
 
-    timeoutId = window.setTimeout(streamNextToken, STREAM_SPEED_MS);
+    streamMessage();
 
     return () => {
       cancelled = true;
       window.clearTimeout(timeoutId);
     };
-  }, [messageTokens, streamKey]);
+  }, [fullMessage, streamKey]);
 
   const pushDestination = useCallback((destinationId) => {
     const destination = getDestinationContentOrDefault(destinationId);
