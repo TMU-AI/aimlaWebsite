@@ -136,7 +136,7 @@ const About = () => {
                     viewport={{ once: true, amount: 0.4 }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
                 >
-                    <Highlight>Hey we are TMU AIMLA</Highlight>
+                    <Highlight>Hey we are TMU AIMLA (release preview test)</Highlight>
                     <p>
                         We bridge the gap between classroom theory and real-world AI. AIMLA is the club where TMU students roll up
                         their sleeves on hands-on projects, learn modern tools together, and get guidance from industry professionals
