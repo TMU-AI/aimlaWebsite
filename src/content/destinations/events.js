@@ -8,8 +8,15 @@ const events = {
   title: "Events and Workshops",
   body:
     "AIMLA hosts technical workshops, project sessions, networking events, and beginner-friendly learning opportunities. These events are meant to help students understand AI, machine learning, APIs, coding tools, and real-world development workflows.",
-  suggestedQuery: "What kind of projects can I build?",
-  aliases: ["events", "workshops", "sessions", "technical events", "upcoming events"],
+  suggestedQuery: "What events are upcoming?",
+  aliases: [
+    "events",
+    "workshops",
+    "sessions",
+    "technical events",
+    "upcoming events",
+    "what events are upcoming",
+  ],
 };
 
 export default events;

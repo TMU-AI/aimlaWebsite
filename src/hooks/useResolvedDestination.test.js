@@ -1,118 +1,497 @@
 import React from "react";
-import { act, fireEvent, render, screen } from "@testing-library/react";
+
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
+
+import { TextDecoder } from "util";
 
 import {
   tokenizeForStreaming,
   useResolvedDestination,
 } from "./useResolvedDestination";
 
+/**
+ * Jest's browser environment may not provide TextDecoder.
+ * The streaming hook needs it to decode backend chunks.
+ */
+if (!global.TextDecoder) {
+  global.TextDecoder = TextDecoder;
+}
+
+/**
+ * Small component used to expose the hook values
+ * during testing.
+ */
 function HookTestComponent() {
   const {
-    activeDestination,
+    activeDestinationId,
     fullMessage,
     isStreaming,
     pushDestination,
+    sources,
+    streamError,
     visibleMessage,
   } = useResolvedDestination();
 
   return (
     <div>
-      <p data-testid="active-destination">{activeDestination.id}</p>
-      <p data-testid="full-message">{fullMessage}</p>
-      <p data-testid="visible-message">{visibleMessage}</p>
-      <p data-testid="is-streaming">{String(isStreaming)}</p>
+      <div data-testid="active-destination">
+        {activeDestinationId}
+      </div>
 
-      <button type="button" onClick={() => pushDestination("events")}>
-        Go to Events
+      <div data-testid="full-message">
+        {fullMessage}
+      </div>
+
+      <div data-testid="visible-message">
+        {visibleMessage}
+      </div>
+
+      <div data-testid="is-streaming">
+        {String(isStreaming)}
+      </div>
+
+      <div data-testid="source-count">
+        {sources.length}
+      </div>
+
+      <div data-testid="stream-error">
+        {streamError}
+      </div>
+
+      <button
+        type="button"
+        onClick={() => {
+          pushDestination("events");
+        }}
+      >
+        Events
       </button>
     </div>
   );
 }
 
-describe("tokenizeForStreaming", () => {
-  test("preserves spaces between words", () => {
-    const text = "Hello AIMLA team";
-    const tokens = tokenizeForStreaming(text);
+/**
+ * Creates a fake fetch response containing SSE events.
+ *
+ * Each event is returned as a separate byte chunk,
+ * similar to the real backend stream.
+ */
+function createSseResponse(events) {
+  const chunks = events.map((event) => {
+    const eventText =
+      `data: ${JSON.stringify(event)}\n\n`;
 
-    expect(tokens.join("")).toBe(text);
+    return Buffer.from(eventText, "utf8");
   });
 
-  test("preserves punctuation", () => {
-    const text = "Hello, AIMLA!";
-    const tokens = tokenizeForStreaming(text);
+  let currentChunk = 0;
 
-    expect(tokens.join("")).toBe(text);
-  });
+  return {
+    ok: true,
+    status: 200,
 
-  test("preserves line breaks", () => {
-    const text = "Line one\nLine two";
-    const tokens = tokenizeForStreaming(text);
+    body: {
+      getReader() {
+        return {
+          async read() {
+            if (currentChunk < chunks.length) {
+              const value =
+                chunks[currentChunk];
 
-    expect(tokens.join("")).toBe(text);
-  });
+              currentChunk += 1;
 
-  test("returns an empty array for empty text", () => {
-    expect(tokenizeForStreaming("")).toEqual([]);
-    expect(tokenizeForStreaming(null)).toEqual([]);
-    expect(tokenizeForStreaming(undefined)).toEqual([]);
-  });
-});
+              return {
+                value,
+                done: false,
+              };
+            }
 
-describe("useResolvedDestination streaming", () => {
-  beforeEach(() => {
-    jest.useFakeTimers();
-  });
+            return {
+              value: undefined,
+              done: true,
+            };
+          },
+        };
+      },
+    },
+  };
+}
 
-  afterEach(() => {
-    jest.clearAllTimers();
-    jest.useRealTimers();
-  });
-
-  test("streams the default destination message in order", () => {
-    render(<HookTestComponent />);
-
-    expect(screen.getByTestId("visible-message").textContent).toBe("");
-    expect(screen.getByTestId("is-streaming").textContent).toBe("true");
-
-    act(() => {
-      jest.runAllTimers();
-    });
-
-    expect(screen.getByTestId("visible-message").textContent).toBe(
-      screen.getByTestId("full-message").textContent
+describe(
+  "tokenizeForStreaming",
+  () => {
+    test(
+      "preserves spaces, punctuation and line breaks",
+      () => {
+        expect(
+          tokenizeForStreaming(
+            "Hello, world!\nNext line."
+          )
+        ).toEqual([
+          "Hello",
+          ",",
+          " ",
+          "world",
+          "!",
+          "\n",
+          "Next",
+          " ",
+          "line",
+          ".",
+        ]);
+      }
     );
 
-    expect(screen.getByTestId("is-streaming").textContent).toBe("false");
-  });
+    test(
+      "returns an empty array for empty text",
+      () => {
+        expect(
+          tokenizeForStreaming("")
+        ).toEqual([]);
 
-  test("resets and streams again when destination changes", () => {
-    render(<HookTestComponent />);
+        expect(
+          tokenizeForStreaming(null)
+        ).toEqual([]);
+      }
+    );
+  }
+);
 
-    act(() => {
-      jest.runAllTimers();
+describe(
+  "useResolvedDestination streaming",
+  () => {
+    beforeEach(() => {
+      global.fetch = jest.fn();
     });
 
-    const firstMessage = screen.getByTestId("visible-message").textContent;
+    afterEach(() => {
+      jest.clearAllMocks();
 
-    act(() => {
-      fireEvent.click(screen.getByText("Go to Events"));
+      delete global.fetch;
     });
 
-    expect(screen.getByTestId("active-destination").textContent).toBe("events");
-    expect(screen.getByTestId("visible-message").textContent).toBe("");
+    test(
+      "streams the default destination response in order",
+      async () => {
+        global.fetch.mockResolvedValueOnce(
+          createSseResponse([
+            {
+              type: "sources",
 
-    act(() => {
-      jest.runAllTimers();
-    });
+              sources: [
+                {
+                  id: "about-aimla",
 
-    expect(screen.getByTestId("visible-message").textContent).toBe(
-      screen.getByTestId("full-message").textContent
+                  title:
+                    "About TMU AIMLA",
+
+                  contentType:
+                    "about",
+
+                  score: 0.95,
+                },
+              ],
+            },
+            {
+              type: "text",
+              text: "TMU AIMLA ",
+            },
+            {
+              type: "text",
+              text:
+                "is a student-led association.",
+            },
+            {
+              type: "done",
+            },
+          ])
+        );
+
+        render(
+          <HookTestComponent />
+        );
+
+        await waitFor(() => {
+          expect(
+            screen
+              .getByTestId(
+                "visible-message"
+              )
+              .textContent
+          ).toBe(
+            "TMU AIMLA is a student-led association."
+          );
+        });
+
+        expect(
+          screen
+            .getByTestId(
+              "source-count"
+            )
+            .textContent
+        ).toBe("1");
+
+        expect(
+          screen
+            .getByTestId(
+              "is-streaming"
+            )
+            .textContent
+        ).toBe("false");
+
+        expect(
+          screen
+            .getByTestId(
+              "stream-error"
+            )
+            .textContent
+        ).toBe("");
+
+        expect(
+          global.fetch
+        ).toHaveBeenCalledTimes(1);
+
+        expect(
+          global.fetch
+        ).toHaveBeenCalledWith(
+          "http://localhost:3001/api/rewrite-message",
+
+          expect.objectContaining({
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+
+            signal:
+              expect.any(Object),
+          })
+        );
+
+        const requestOptions =
+          global.fetch.mock.calls[0][1];
+
+        const requestBody =
+          JSON.parse(
+            requestOptions.body
+          );
+
+        expect(
+          requestBody.message
+        ).toEqual(
+          expect.any(String)
+        );
+
+        expect(
+          requestBody.message.length
+        ).toBeGreaterThan(0);
+
+        expect(
+          requestBody.fallbackText
+        ).toEqual(
+          expect.any(String)
+        );
+      }
     );
 
-    expect(screen.getByTestId("visible-message").textContent).not.toBe(
-      firstMessage
+    test(
+      "resets and streams again when destination changes",
+      async () => {
+        global.fetch
+          .mockResolvedValueOnce(
+            createSseResponse([
+              {
+                type: "sources",
+                sources: [],
+              },
+              {
+                type: "text",
+                text:
+                  "Default AIMLA response.",
+              },
+              {
+                type: "done",
+              },
+            ])
+          )
+          .mockResolvedValueOnce(
+            createSseResponse([
+              {
+                type: "sources",
+
+                sources: [
+                  {
+                    id:
+                      "event-workshop",
+
+                    title:
+                      "AIMLA Events",
+
+                    contentType:
+                      "event",
+
+                    score:
+                      0.91,
+                  },
+                ],
+              },
+              {
+                type: "text",
+                text:
+                  "AIMLA hosts technical ",
+              },
+              {
+                type: "text",
+                text:
+                  "workshops and events.",
+              },
+              {
+                type: "done",
+              },
+            ])
+          );
+
+        render(
+          <HookTestComponent />
+        );
+
+        await waitFor(() => {
+          expect(
+            screen
+              .getByTestId(
+                "visible-message"
+              )
+              .textContent
+          ).toBe(
+            "Default AIMLA response."
+          );
+        });
+
+        await act(async () => {
+          fireEvent.click(
+            screen.getByRole(
+              "button",
+              {
+                name: "Events",
+              }
+            )
+          );
+        });
+
+        await waitFor(() => {
+          expect(
+            screen
+              .getByTestId(
+                "active-destination"
+              )
+              .textContent
+          ).toBe("events");
+        });
+
+        await waitFor(() => {
+          expect(
+            screen
+              .getByTestId(
+                "visible-message"
+              )
+              .textContent
+          ).toBe(
+            "AIMLA hosts technical workshops and events."
+          );
+        });
+
+        expect(
+          screen
+            .getByTestId(
+              "source-count"
+            )
+            .textContent
+        ).toBe("1");
+
+        expect(
+          global.fetch
+        ).toHaveBeenCalledTimes(2);
+
+        const secondRequestOptions =
+          global.fetch.mock.calls[1][1];
+
+        const secondRequestBody =
+          JSON.parse(
+            secondRequestOptions.body
+          );
+
+        expect(
+          secondRequestBody.message
+        ).toEqual(
+          expect.any(String)
+        );
+
+        expect(
+          secondRequestBody.message.length
+        ).toBeGreaterThan(0);
+
+        expect(
+          secondRequestBody.fallbackText
+        ).toContain(
+          "AIMLA"
+        );
+      }
     );
 
-    expect(screen.getByTestId("is-streaming").textContent).toBe("false");
-  });
-});
+    test(
+      "shows fallback content when the backend request fails",
+      async () => {
+        global.fetch.mockResolvedValueOnce({
+          ok: false,
+          status: 500,
+
+          async json() {
+            return {
+              error:
+                "Backend request failed.",
+            };
+          },
+        });
+
+        render(
+          <HookTestComponent />
+        );
+
+        await waitFor(() => {
+          expect(
+            screen
+              .getByTestId(
+                "stream-error"
+              )
+              .textContent
+          ).toBe(
+            "Backend request failed."
+          );
+        });
+
+        expect(
+          screen
+            .getByTestId(
+              "visible-message"
+            )
+            .textContent.length
+        ).toBeGreaterThan(0);
+
+        expect(
+          screen
+            .getByTestId(
+              "is-streaming"
+            )
+            .textContent
+        ).toBe("false");
+      }
+    );
+  }
+);

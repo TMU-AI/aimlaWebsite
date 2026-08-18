@@ -9,14 +9,16 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
-    "concurrently": "^10.0.3",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
     "framer-motion": "^6.2.8",
     "gsap": "^3.9.1",
     "locomotive-scroll": "^4.1.4",
     "openai": "^6.45.0",
+    "pg": "^8.16.3",
+    "pgvector": "^0.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-locomotive-scroll": "^0.2.0",
@@ -25,14 +27,19 @@
     "styled-components": "^5.3.3",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "concurrently": "^10.0.3"
+  },
   "scripts": {
-  "start": "react-scripts start",
-  "server": "node server/index.mjs",
-  "dev": "concurrently -k -n SERVER,CLIENT \"npm run server\" \"npm start\"",
-  "build": "react-scripts build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject"
-},
+    "start": "react-scripts start",
+    "server": "node server/index.mjs",
+    "dev": "concurrently -k -n SERVER,CLIENT \"npm run server\" \"npm start\"",
+    "index:knowledge": "node server/scripts/indexKnowledge.mjs",
+    "test:retrieval": "node server/scripts/testRetrieval.mjs",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",

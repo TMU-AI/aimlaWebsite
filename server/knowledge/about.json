@@ -1,0 +1,113 @@
+[
+  {
+    "id": "about-tmu-aimla-overview",
+    "contentType": "about",
+    "title": "About TMU AIMLA",
+    "content": "TMU AIMLA is a student club focused on bridging the gap between classroom theory and real-world artificial intelligence. The club gives Toronto Metropolitan University students opportunities to work on hands-on projects, learn modern AI tools, and receive guidance from industry professionals.",
+    "metadata": {
+      "section": "About Us",
+      "organization": "TMU AIMLA",
+      "fullName": "Toronto Metropolitan University Artificial Intelligence and Machine Learning Association",
+      "audience": "TMU students",
+      "topics": [
+        "artificial intelligence",
+        "machine learning",
+        "hands-on projects",
+        "industry guidance",
+        "modern AI tools"
+      ],
+      "source": "Official TMU AIMLA website About component",
+      "sourceComponent": "About.js"
+    },
+    "status": "current"
+  },
+  {
+    "id": "about-hands-on-projects",
+    "contentType": "about",
+    "title": "Hands-On AI Projects at TMU AIMLA",
+    "content": "TMU AIMLA helps students move beyond classroom theory by working directly on practical artificial intelligence and machine learning projects. Members can build models, create demonstrations, experiment with modern tools, and develop real-world technical skills.",
+    "metadata": {
+      "section": "About Us",
+      "organization": "TMU AIMLA",
+      "focus": "Hands-on learning",
+      "activities": [
+        "building AI models",
+        "shipping demos",
+        "experimenting with AI tools",
+        "developing technical skills"
+      ],
+      "source": "Official TMU AIMLA website About component",
+      "sourceComponent": "About.js"
+    },
+    "status": "current"
+  },
+  {
+    "id": "about-learning-community",
+    "contentType": "about",
+    "title": "TMU AIMLA Learning Community",
+    "content": "TMU AIMLA provides a supportive community where students can experiment, ask questions, learn together, and develop their skills beyond what is normally covered in a classroom syllabus. The club is designed to help students turn curiosity about artificial intelligence into practical capability alongside other motivated learners.",
+    "metadata": {
+      "section": "About Us",
+      "organization": "TMU AIMLA",
+      "focus": "Community and collaborative learning",
+      "benefits": [
+        "supportive learning environment",
+        "peer collaboration",
+        "asking technical questions",
+        "learning beyond the syllabus",
+        "building practical confidence"
+      ],
+      "source": "Official TMU AIMLA website About component",
+      "sourceComponent": "About.js"
+    },
+    "status": "current"
+  },
+  {
+    "id": "about-industry-guidance",
+    "contentType": "about",
+    "title": "Industry Guidance at TMU AIMLA",
+    "content": "TMU AIMLA connects students with guidance from industry professionals who have experience working with artificial intelligence, machine learning, and modern technology. This guidance helps students better understand how classroom knowledge can be applied to real projects and professional work.",
+    "metadata": {
+      "section": "About Us",
+      "organization": "TMU AIMLA",
+      "focus": "Industry guidance",
+      "topics": [
+        "industry professionals",
+        "career guidance",
+        "real-world applications",
+        "professional development"
+      ],
+      "source": "Official TMU AIMLA website About component",
+      "sourceComponent": "About.js"
+    },
+    "status": "current"
+  },
+  {
+    "id": "about-photo-gallery",
+    "contentType": "about",
+    "title": "TMU AIMLA Community Photo Gallery",
+    "content": "The TMU AIMLA About section includes photographs showing an AIMLA workshop, the AIMLA team, and the AIMLA community attending club activities.",
+    "metadata": {
+      "section": "About Us",
+      "organization": "TMU AIMLA",
+      "recordType": "image-gallery",
+      "images": [
+        {
+          "path": "../assets/Images/2.JPG",
+          "description": "AIMLA workshop photo"
+        },
+        {
+          "path": "../assets/Images/aimlaTeam.JPG",
+          "description": "AIMLA team photo"
+        },
+        {
+          "path": "../assets/Images/crowd1.JPG",
+          "description": "AIMLA community crowd"
+        }
+      ],
+      "source": "Official TMU AIMLA website About component",
+      "sourceComponent": "About.js"
+    },
+    "status": "current"
+  }
+]

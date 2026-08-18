@@ -1,0 +1,100 @@
+[
+  {
+    "id": "join-tmu-aimla-team",
+    "contentType": "join",
+    "title": "Join the TMU AIMLA Team",
+    "content": "Students interested in joining TMU AIMLA can submit the club's team registration form. Joining allows students to add their name to the AIMLA roster, receive updates about openings, and participate in projects, workshops, and events.",
+    "metadata": {
+      "organization": "TMU AIMLA",
+      "action": "join-team",
+      "audience": [
+        "TMU students",
+        "students interested in artificial intelligence",
+        "students interested in machine learning"
+      ],
+      "benefits": [
+        "receive updates about team openings",
+        "participate in AIMLA projects",
+        "attend workshops",
+        "attend events",
+        "join the AIMLA roster"
+      ],
+      "formType": "Google Form",
+      "formUrl": "https://forms.gle/E1btSHLFcBvhta3S7",
+      "buttonText": "Open Google Form",
+      "source": "Official TMU AIMLA website Join component",
+      "sourceComponent": "Join.js"
+    },
+    "status": "current"
+  },
+  {
+    "id": "join-collaborate-with-tmu-aimla",
+    "contentType": "join",
+    "title": "Collaborate with TMU AIMLA",
+    "content": "Clubs, companies, and community organizations can submit TMU AIMLA's collaboration form to propose a partnership. AIMLA collaborates on hack nights, panels, sponsorships, and custom programming tailored to the partner's goals.",
+    "metadata": {
+      "organization": "TMU AIMLA",
+      "action": "collaboration",
+      "audience": [
+        "student clubs",
+        "companies",
+        "community organizations",
+        "potential sponsors",
+        "potential partners"
+      ],
+      "collaborationTypes": [
+        "hack nights",
+        "panels",
+        "sponsorships",
+        "custom programming",
+        "community partnerships"
+      ],
+      "formType": "Google Form",
+      "formUrl": "https://forms.gle/hdURjfyYkerg5DhU8",
+      "buttonText": "Start a Collaboration",
+      "source": "Official TMU AIMLA website Join component",
+      "sourceComponent": "Join.js"
+    },
+    "status": "current"
+  },
+  {
+    "id": "contact-tmu-aimla-email",
+    "contentType": "contact",
+    "title": "Contact TMU AIMLA by Email",
+    "content": "Questions for TMU AIMLA can be sent to aimla.tmu@gmail.com.",
+    "metadata": {
+      "organization": "TMU AIMLA",
+      "contactType": "email",
+      "email": "aimla.tmu@gmail.com",
+      "displayedEmail": "aimla.tmu@gmail.com",
+      "sourceMailtoValue": "aimla@gmail.com",
+      "sourceHasEmailMismatch": true,
+      "source": "Official TMU AIMLA website Join component",
+      "sourceComponent": "Join.js"
+    },
+    "status": "current"
+  },
+  {
+    "id": "contact-tmu-aimla-social-links",
+    "contentType": "contact",
+    "title": "TMU AIMLA Social Media and Community Links",
+    "content": "TMU AIMLA can be followed on Instagram and LinkedIn. Students can also join the TMU AIMLA Discord community.",
+    "metadata": {
+      "organization": "TMU AIMLA",
+      "contactType": "social-media",
+      "socialLinks": {
+        "instagram": "https://www.instagram.com/tmu_aimla/",
+        "linkedin": "https://www.linkedin.com/company/tmu-aimla/",
+        "discord": "https://discord.gg/NJWWDRT62U"
+      },
+      "platforms": [
+        "Instagram",
+        "LinkedIn",
+        "Discord"
+      ],
+      "source": "Official TMU AIMLA website Join component",
+      "sourceComponent": "Join.js"
+    },
+    "status": "current"
+  }
+]
