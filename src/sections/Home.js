@@ -1,3 +1,7 @@
+/**
+ * Legacy home section.
+ * Composes the fullscreen cover video and logo for the old scroll-based layout.
+ */
 import React from "react"
 import styled from "styled-components"
 import CoverVideo from "../components/CoverVideo"

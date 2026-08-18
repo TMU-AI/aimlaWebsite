@@ -1,3 +1,7 @@
+/**
+ * Legacy navigation shell.
+ * Provides the fixed top navigation and scroll-linked menu interactions.
+ */
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";

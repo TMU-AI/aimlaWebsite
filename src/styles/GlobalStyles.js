@@ -1,3 +1,7 @@
+/**
+ * Global style reset and base theme surface.
+ * Defines app-wide fonts, overflow handling, and root layout defaults.
+ */
 import { createGlobalStyle } from "styled-components";
 import "@fontsource/kaushan-script";
 import "@fontsource/sirin-stencil";
@@ -13,19 +17,27 @@ const GlobalStyles = createGlobalStyle`
   html, body {
     width: 100%;
     max-width: 100%;
+    min-height: 100%;
     overflow-x: hidden;
   }
 
-  #root, [data-scroll-container] {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-    position: relative;
+  html {
+    background: #05070d;
   }
 
   body {
     font-family: "Sirin Stencil";
     overflow-x: hidden;
+    background: #05070d;
+    color: #ffffff;
+  }
+
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
   }
 
   h1, h2, h3, h4, h5, h6 {

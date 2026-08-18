@@ -1,3 +1,7 @@
+/**
+ * Legacy about section.
+ * Renders the club overview and photo gallery for the older multi-section site.
+ */
 import React from "react"
 import styled from "styled-components"
 import { motion } from "framer-motion"

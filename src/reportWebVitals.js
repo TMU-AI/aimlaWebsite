@@ -1,3 +1,7 @@
+/**
+ * Web vitals reporting hook.
+ * Dynamically loads `web-vitals` when performance reporting is enabled.
+ */
 const reportWebVitals = onPerfEntry => {
   if (onPerfEntry && onPerfEntry instanceof Function) {
     import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {

@@ -1,3 +1,7 @@
+/**
+ * Legacy join section.
+ * Shows sign-up calls to action and club social links for the old layout.
+ */
 import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";

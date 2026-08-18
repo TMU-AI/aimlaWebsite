@@ -1,0 +1,283 @@
+[
+  {
+    "id": "member-antonio-souza",
+    "contentType": "member",
+    "title": "TMU AIMLA President Antonio Souza",
+    "content": "Antonio Souza is the current President of TMU AIMLA.",
+    "status": "current",
+    "metadata": {
+      "name": "Antonio Souza",
+      "role": "President",
+      "team": "Executive",
+      "linkedin": "https://www.linkedin.com/in/antonio-souza-/",
+      "sourceTeamYear": "2025-2026"
+    }
+  },
+  {
+    "id": "member-areej-ubaid",
+    "contentType": "member",
+    "title": "TMU AIMLA VP Events Areej Ubaid",
+    "content": "Areej Ubaid is a current VP of Events for TMU AIMLA and helps lead the Events department.",
+    "status": "current",
+    "metadata": {
+      "name": "Areej Ubaid",
+      "role": "VP of Events",
+      "team": "Events",
+      "linkedin": "https://www.linkedin.com/in/areej-ubaid/",
+      "sourceTeamYear": "2025-2026"
+    }
+  },
+  {
+    "id": "member-jarin-yasmin-mim",
+    "contentType": "member",
+    "title": "TMU AIMLA VP Events Jarin Yasmin Mim",
+    "content": "Jarin Yasmin Mim is a current VP of Events for TMU AIMLA and helps lead the Events department.",
+    "status": "current",
+    "metadata": {
+      "name": "Jarin Yasmin Mim",
+      "role": "VP of Events",
+      "team": "Events",
+      "linkedin": "https://www.linkedin.com/in/jarin-tasnim-mim-b47310390/",
+      "sourceTeamYear": "2025-2026"
+    }
+  },
+  {
+    "id": "member-seif-eltamboly",
+    "contentType": "member",
+    "title": "TMU AIMLA VP Finance Seif Eltamboly",
+    "content": "Seif Eltamboly is the current VP of Finance for TMU AIMLA and leads the Finances department.",
+    "status": "current",
+    "metadata": {
+      "name": "Seif Eltamboly",
+      "role": "VP of Finance",
+      "team": "Finances",
+      "linkedin": "https://www.linkedin.com/in/seifeltamboly/",
+      "sourceTeamYear": "2025-2026"
+    }
+  },
+  {
+    "id": "member-maryam-mehdi",
+    "contentType": "member",
+    "title": "TMU AIMLA VP of Marketing Maryam Mehdi",
+    "content": "Maryam Mehdi is the current VP of Marketing for TMU AIMLA and leads the Marketing department. Her username is @maryammehdi24.",
+    "status": "current",
+    "metadata": {
+      "name": "Maryam Mehdi",
+      "role": "VP of Marketing",
+      "team": "Marketing",
+      "username": "@maryammehdi24",
+      "linkedin": null,
+      "sourceTeamYear": "2025-2026"
+    }
+  },
+  {
+    "id": "member-jermain-antillon",
+    "contentType": "member",
+    "title": "Former TMU AIMLA VP of Marketing Jermain Antillon",
+    "content": "Jermain Antillon previously served as the VP of Marketing for TMU AIMLA.",
+    "status": "former",
+    "metadata": {
+      "name": "Jermain Antillon",
+      "role": "VP of Marketing",
+      "team": "Marketing",
+      "linkedin": null,
+      "sourceTeamYear": "2025-2026"
+    }
+  },
+  {
+    "id": "member-joel-oguachuba",
+    "contentType": "member",
+    "title": "TMU AIMLA Marketing Member Joel Oguachuba",
+    "content": "Joel Oguachuba is a current member of the TMU AIMLA Marketing department.",
+    "status": "current",
+    "metadata": {
+      "name": "Joel Oguachuba",
+      "role": "Marketing Member",
+      "team": "Marketing",
+      "linkedin": "https://www.linkedin.com/in/joel-oguachuba-4368962b5/",
+      "sourceTeamYear": "2025-2026"
+    }
+  },
+  {
+    "id": "member-shriya-gill",
+    "contentType": "member",
+    "title": "TMU AIMLA Marketing Member Shriya Gill",
+    "content": "Shriya Gill is a current member of the TMU AIMLA Marketing department.",
+    "status": "current",
+    "metadata": {
+      "name": "Shriya Gill",
+      "role": "Marketing Member",
+      "team": "Marketing",
+      "linkedin": null,
+      "sourceTeamYear": "2025-2026"
+    }
+  },
+  {
+    "id": "member-lana-duong",
+    "contentType": "member",
+    "title": "TMU AIMLA Marketing Member Lana Duong",
+    "content": "Lana Duong is a current member of the TMU AIMLA Marketing department.",
+    "status": "current",
+    "metadata": {
+      "name": "Lana Duong",
+      "role": "Marketing Member",
+      "team": "Marketing",
+      "linkedin": "https://www.linkedin.com/in/lana-duong-b884012bb/",
+      "sourceTeamYear": "2025-2026"
+    }
+  },
+  {
+    "id": "member-oliver-manuel",
+    "contentType": "member",
+    "title": "TMU AIMLA VP Infrastructure Oliver Manuel",
+    "content": "Oliver Manuel is the current VP of Infrastructure for TMU AIMLA and leads the Infrastructure department.",
+    "status": "current",
+    "metadata": {
+      "name": "Oliver Manuel",
+      "role": "VP of Infrastructure",
+      "team": "Infrastructure",
+      "linkedin": "https://www.linkedin.com/in/oliver-manuel-86b4b9387/",
+      "sourceTeamYear": "2025-2026"
+    }
+  },
+  {
+    "id": "member-derrick-lam",
+    "contentType": "member",
+    "title": "TMU AIMLA Infrastructure Member Derrick Lam",
+    "content": "Derrick Lam is a current member of the TMU AIMLA Infrastructure department.",
+    "status": "current",
+    "metadata": {
+      "name": "Derrick Lam",
+      "role": "Infrastructure Member",
+      "team": "Infrastructure",
+      "linkedin": "https://www.linkedin.com/in/derrick-lam-09575b219/",
+      "sourceTeamYear": "2025-2026"
+    }
+  },
+  {
+    "id": "member-skye",
+    "contentType": "member",
+    "title": "TMU AIMLA Infrastructure Member Skye",
+    "content": "Skye is a current member of the TMU AIMLA Infrastructure department.",
+    "status": "current",
+    "metadata": {
+      "name": "Skye",
+      "role": "Infrastructure Member",
+      "team": "Infrastructure",
+      "linkedin": "https://www.linkedin.com/in/dean-torallo/",
+      "sourceTeamYear": "2025-2026"
+    }
+  },
+  {
+    "id": "member-walker-egsgard",
+    "contentType": "member",
+    "title": "TMU AIMLA Infrastructure Member Walker Egsgard",
+    "content": "Walker Egsgard is a current member of the TMU AIMLA Infrastructure department.",
+    "status": "current",
+    "metadata": {
+      "name": "Walker Egsgard",
+      "role": "Infrastructure Member",
+      "team": "Infrastructure",
+      "linkedin": "https://www.linkedin.com/in/walker-egsgard/",
+      "sourceTeamYear": "2025-2026"
+    }
+  },
+  {
+    "id": "member-jenison-joseph",
+    "contentType": "member",
+    "title": "TMU AIMLA VP Outreach Jenison Joseph",
+    "content": "Jenison Joseph is the current VP of Outreach for TMU AIMLA and leads the Outreach department.",
+    "status": "current",
+    "metadata": {
+      "name": "Jenison Joseph",
+      "role": "VP of Outreach",
+      "team": "Outreach",
+      "linkedin": "https://www.linkedin.com/in/jenison-joseph-491077258/",
+      "sourceTeamYear": "2025-2026"
+    }
+  },
+  {
+    "id": "member-ronald-bessada",
+    "contentType": "member",
+    "title": "TMU AIMLA Outreach Member Ronald Bessada",
+    "content": "Ronald Bessada is a current member of the TMU AIMLA Outreach department.",
+    "status": "current",
+    "metadata": {
+      "name": "Ronald Bessada",
+      "role": "Outreach Member",
+      "team": "Outreach",
+      "linkedin": "https://www.linkedin.com/in/ronald-bessada-3b176a34a/",
+      "sourceTeamYear": "2025-2026"
+    }
+  },
+  {
+    "id": "member-christina-vanni",
+    "contentType": "member",
+    "title": "TMU AIMLA VP Social Media Christina Vanni",
+    "content": "Christina Vanni is a current VP of Social Media for TMU AIMLA and helps lead the Social Media department.",
+    "status": "current",
+    "metadata": {
+      "name": "Christina Vanni",
+      "role": "VP of Social Media",
+      "team": "Social Media",
+      "linkedin": "https://www.linkedin.com/in/christina-vanni-1ba709389/",
+      "sourceTeamYear": "2025-2026"
+    }
+  },
+  {
+    "id": "member-zulaikha-khoram",
+    "contentType": "member",
+    "title": "TMU AIMLA VP Social Media Zulaikha Khoram",
+    "content": "Zulaikha Khoram is a current VP of Social Media for TMU AIMLA and helps lead the Social Media department.",
+    "status": "current",
+    "metadata": {
+      "name": "Zulaikha Khoram",
+      "role": "VP of Social Media",
+      "team": "Social Media",
+      "linkedin": "https://www.linkedin.com/in/zulaikha-khoram-aa5186299/",
+      "sourceTeamYear": "2025-2026"
+    }
+  },
+  {
+    "id": "member-belal-armanazi",
+    "contentType": "member",
+    "title": "TMU AIMLA VP Education Belal Armanazi",
+    "content": "Belal Armanazi is the current VP of Education for TMU AIMLA and leads the Education department.",
+    "status": "current",
+    "metadata": {
+      "name": "Belal Armanazi",
+      "role": "VP of Education",
+      "team": "Education",
+      "linkedin": "https://www.linkedin.com/in/belal-armanazi/",
+      "sourceTeamYear": "2025-2026"
+    }
+  },
+  {
+    "id": "member-nousha-borhani",
+    "contentType": "member",
+    "title": "TMU AIMLA Education Member Nousha Borhani",
+    "content": "Nousha Borhani is a current member of the TMU AIMLA Education department.",
+    "status": "current",
+    "metadata": {
+      "name": "Nousha Borhani",
+      "role": "Education Member",
+      "team": "Education",
+      "linkedin": "https://www.linkedin.com/in/nousha-borhani/",
+      "sourceTeamYear": "2025-2026"
+    }
+  },
+  {
+    "id": "member-malaika-ali",
+    "contentType": "member",
+    "title": "TMU AIMLA General Member Malaika Ali",
+    "content": "Malaika Ali is a current general member of TMU AIMLA.",
+    "status": "current",
+    "metadata": {
+      "name": "Malaika Ali",
+      "role": "General Member",
+      "team": "General Members",
+      "linkedin": "https://www.linkedin.com/in/malaika-ali-52a1b7239/",
+      "sourceTeamYear": "2025-2026"
+    }
+  }
+]

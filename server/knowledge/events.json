@@ -1,0 +1,190 @@
+[
+  {
+    "id": "event-aws-tmu-aimla-collaboration",
+    "contentType": "event",
+    "title": "AWS and TMU AIMLA Collaboration",
+    "content": "TMU AIMLA has announced a collaboration event with Amazon Web Services focused on the intersection of AWS technology and artificial intelligence or machine learning. The event date and location are still to be announced, and registration is not currently open.",
+    "metadata": {
+      "organization": "TMU AIMLA",
+      "eventName": "AWS & TMU AIMLA Collab!",
+      "sourceGroup": "upcoming",
+      "eventStatus": "announced",
+      "dateDisplay": "TBA",
+      "dateConfirmed": false,
+      "location": "TBA",
+      "locationConfirmed": false,
+      "signUpOpen": false,
+      "signUpLink": null,
+      "topics": [
+        "Amazon Web Services",
+        "AWS",
+        "artificial intelligence",
+        "machine learning",
+        "cloud computing"
+      ],
+      "source": "Official TMU AIMLA website Events component",
+      "sourceComponent": "Events.js",
+      "sourceEventId": "upcoming-2"
+    },
+    "status": "current"
+  },
+  {
+    "id": "event-code-blitz",
+    "contentType": "event",
+    "title": "Code Blitz",
+    "content": "Code Blitz is a coding competition organized for TMU Tech Week. It is intended for TMU students, but students from outside Toronto Metropolitan University are also welcome. The source lists the event for February 17 at 6:00 PM in ENG101. Registration is listed as open.",
+    "metadata": {
+      "organization": "TMU AIMLA",
+      "eventName": "Code Blitz",
+      "sourceGroup": "upcoming",
+      "eventStatus": "date-needs-confirmation",
+      "dateDisplay": "Feb 17th, 6pm",
+      "month": "February",
+      "day": 17,
+      "time": "6:00 PM",
+      "year": null,
+      "dateConfirmed": false,
+      "location": "ENG101",
+      "locationConfirmed": true,
+      "signUpOpen": true,
+      "signUpLink": "https://forms.gle/3r5roJwHQhwSLEzX8",
+      "audience": [
+        "TMU students",
+        "students outside TMU"
+      ],
+      "topics": [
+        "coding competition",
+        "TMU Tech Week",
+        "programming",
+        "student competition"
+      ],
+      "source": "Official TMU AIMLA website Events component",
+      "sourceComponent": "Events.js",
+      "sourceEventId": "upcoming-3"
+    },
+    "status": "current"
+  },
+  {
+    "id": "event-mcu-aimla-personal-jarvis",
+    "contentType": "event",
+    "title": "MCU x AIMLA Personal J.A.R.V.I.S.",
+    "content": "MCU and TMU AIMLA have announced a Personal J.A.R.V.I.S. event about building or exploring a personal artificial intelligence assistant inspired by Iron Man's JARVIS. The source lists the event for March 9 at 6:00 PM, with the location still to be announced. Registration is not currently open.",
+    "metadata": {
+      "organization": "TMU AIMLA",
+      "collaborator": "MCU",
+      "eventName": "MCU x AIMLA Personal J.A.R.V.I.S",
+      "sourceGroup": "upcoming",
+      "eventStatus": "date-needs-confirmation",
+      "dateDisplay": "Mar 9, 6pm",
+      "month": "March",
+      "day": 9,
+      "time": "6:00 PM",
+      "year": null,
+      "dateConfirmed": false,
+      "location": "TBA",
+      "locationConfirmed": false,
+      "signUpOpen": false,
+      "signUpLink": null,
+      "topics": [
+        "personal AI assistant",
+        "JARVIS",
+        "artificial intelligence",
+        "AI applications"
+      ],
+      "source": "Official TMU AIMLA website Events component",
+      "sourceComponent": "Events.js",
+      "sourceEventId": "upcoming-4"
+    },
+    "status": "current"
+  },
+  {
+    "id": "event-qa-networking-2025",
+    "contentType": "event",
+    "title": "Q&A and Networking Event",
+    "content": "TMU AIMLA held a Q&A and networking event on November 19, 2025. The event connected TMU students with industry professionals and student leaders for open discussion, career insights, networking, and community building.",
+    "metadata": {
+      "organization": "TMU AIMLA",
+      "eventName": "Q&A + Networking Event",
+      "sourceGroup": "previous",
+      "eventStatus": "past",
+      "dateDisplay": "Nov 19, 2025",
+      "date": "2025-11-19",
+      "dateConfirmed": true,
+      "location": null,
+      "signUpOpen": false,
+      "signUpLink": null,
+      "coverImage": "../assets/Images/Food.JPG",
+      "topics": [
+        "networking",
+        "question and answer session",
+        "industry professionals",
+        "student leaders",
+        "career insights",
+        "community building"
+      ],
+      "source": "Official TMU AIMLA website Events component",
+      "sourceComponent": "Events.js",
+      "sourceEventId": "past-1"
+    },
+    "status": "current"
+  },
+  {
+    "id": "event-kickoff-2025",
+    "contentType": "event",
+    "title": "TMU AIMLA Kickoff Event",
+    "content": "TMU AIMLA held its kickoff event on March 20, 2025. The event marked the start of the term and brought together students interested in artificial intelligence and machine learning to connect, learn, and build community.",
+    "metadata": {
+      "organization": "TMU AIMLA",
+      "eventName": "Kickoff Event",
+      "sourceGroup": "previous",
+      "eventStatus": "past",
+      "dateDisplay": "Mar 20, 2025",
+      "date": "2025-03-20",
+      "dateConfirmed": true,
+      "location": null,
+      "signUpOpen": false,
+      "signUpLink": null,
+      "coverImage": "../assets/Images/Event1.JPG",
+      "topics": [
+        "club kickoff",
+        "artificial intelligence",
+        "machine learning",
+        "student community",
+        "networking"
+      ],
+      "source": "Official TMU AIMLA website Events component",
+      "sourceComponent": "Events.js",
+      "sourceEventId": "past-2"
+    },
+    "status": "current"
+  },
+  {
+    "id": "event-compile-and-conquer-2026",
+    "contentType": "event",
+    "title": "Compile and Conquer",
+    "content": "Compile and Conquer was held on March 26, 2026. The event was described by TMU AIMLA as a large collaboration involving computing student organizations at Toronto Metropolitan University.",
+    "metadata": {
+      "organization": "TMU AIMLA",
+      "eventName": "Compile and Conquer",
+      "sourceGroup": "previous",
+      "eventStatus": "past",
+      "dateDisplay": "Mar 26, 2026",
+      "date": "2026-03-26",
+      "dateConfirmed": true,
+      "location": null,
+      "signUpOpen": false,
+      "signUpLink": null,
+      "coverImage": "../assets/Images/compile.JPG",
+      "topics": [
+        "computing students",
+        "student organizations",
+        "collaboration",
+        "Toronto Metropolitan University"
+      ],
+      "source": "Official TMU AIMLA website Events component",
+      "sourceComponent": "Events.js",
+      "sourceEventId": "past-3"
+    },
+    "status": "current"
+  }
+]

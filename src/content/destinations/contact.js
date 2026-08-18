@@ -1,0 +1,22 @@
+/**
+ * Contact destination content.
+ * Provides the fallback contact path for the team.
+ */
+const contact = {
+  id: "contact",
+  label: "Contact",
+  title: "Contact the Team",
+  body:
+    "Reach out to AIMLA through the club's events, social channels, or the current contact routes shared by the team. New members are always welcome to ask questions and get involved.",
+  suggestedQuery: "How can I contact AIMLA?",
+  aliases: [
+    "contact",
+    "contact us",
+    "reach out",
+    "social channels",
+    "ask questions",
+    "how can i contact aimla",
+  ],
+};
+
+export default contact;

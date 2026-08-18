@@ -13,6 +13,12 @@ Modern single-page site for TMU AIMLA, built with React, styled-components, and 
 - `src/sections/*.js` — content sections (Home, About, Events, Team, Join)
 - `src/styles/Themes.js` — theme tokens (colors, typography, nav height)
 
+## Architecture Docs
+- `docs/architecture/legacy/system-overview.md` — current shipped-site purpose, runtime model, and constraints
+- `docs/architecture/legacy/frontend-architecture.md` — current frontend composition, navigation coupling, styling, and content placement
+- `docs/architecture/planned/mvp-block-resolver-architecture.md` — implementation source of truth for the first rewrite MVP
+- `docs/architecture/planned/ai-native-website-architecture.md` — longer-term expansion path beyond the MVP rewrite
+
 ## Editing Content
 - About copy: `src/sections/About.js`
 - Events data (sign-up toggles): `src/sections/Events.js` → `upcomingEvents`
@@ -38,4 +44,4 @@ PRs welcome. Keep styling consistent (styled-components) and prefer `rg` for sea
 
 
 This is also deployed on Vercel. 
-
+ 

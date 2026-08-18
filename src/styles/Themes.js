@@ -1,3 +1,7 @@
+/**
+ * Shared theme tokens.
+ * Exposes the dark theme values used by styled-components throughout the app.
+ */
 
 
 export const dark = {
