@@ -10,7 +10,6 @@ import {
   getDestinationContent,
   getDestinationContentOrDefault,
 } from "../content";
-import { resolveDestination } from "../resolver";
 import { rewriteMessageWithLLM } from "../utils/rewriteMessage";
 
 const DEFAULT_DESTINATION = getDestinationContentOrDefault(DEFAULT_DESTINATION_ID);
@@ -124,21 +123,35 @@ export function useResolvedDestination() {
   }, []);
 
   const handleSubmit = useCallback(
-    (event) => {
+    async (event) => {
       event.preventDefault();
 
-      const { match } = resolveDestination(inputValue);
+      try {
+        const response = await fetch("http://localhost:3001/api/resolve", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ input: inputValue }),
+        });
+        const { match, sourceId, matchedText } = await response.json();
 
-      if (match) {
-        pushDestination(match);
-      } else {
+        if (match) {
+          if (sourceId && sourceId.includes("_") && matchedText) {
+            pushDestination(match);
+            setFullMessage(matchedText);
+          } else {
+            pushDestination(match);
+          }
+        } else {
+          pushFallbackMessage();
+        }
+      } catch {
         pushFallbackMessage();
       }
 
       setInputValue("");
     },
-    [inputValue, pushDestination, pushFallbackMessage]
-  );
+    [inputValue, pushDestination, pushFallbackMessage, setFullMessage]
+  );  
 
   return {
     activeDestination,

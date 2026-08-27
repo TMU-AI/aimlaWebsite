@@ -7,7 +7,7 @@
  */
 import { getDestinationContent } from "../content";
 
-const NAV_DESTINATION_IDS = ["about", "events", "members", "join"];
+const NAV_DESTINATION_IDS = ["about", "events", "projects", "members", "join", "contact"];
 
 export const NAV_ITEMS = NAV_DESTINATION_IDS.map((destinationId) => {
   const destination = getDestinationContent(destinationId);
