@@ -36,6 +36,25 @@ function getDestinationMessage(destination) {
   return destination.content || destination.body || "";
 }
 
+/**
+ * Turns the resolver's `matches` array into the text that gets streamed to the user.
+ * A single match streams as plain prose (unchanged behavior). Multiple matches
+ * (a "broad" query like "who are the members") render as a bulleted list, one
+ * fact per line, so the reader can tell the facts apart instead of getting one
+ * run-on paragraph.
+ */
+export function formatMatchedText(matches, fallbackText) {
+  if (!Array.isArray(matches) || matches.length === 0) {
+    return fallbackText || "";
+  }
+
+  if (matches.length === 1) {
+    return matches[0].text || fallbackText || "";
+  }
+
+  return matches.map((entry) => `- ${entry.text}`).join("\n");
+}
+
 export function useResolvedDestination() {
   const [activeDestinationId, setActiveDestinationId] = useState(
     DEFAULT_DESTINATION_ID
@@ -132,14 +151,13 @@ export function useResolvedDestination() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ input: inputValue }),
         });
-        const { match, sourceId, matchedText } = await response.json();
+        const { match, sourceId, matchedText, matches } = await response.json();
 
         if (match) {
-          if (sourceId && sourceId.includes("_") && matchedText) {
-            pushDestination(match);
-            setFullMessage(matchedText);
-          } else {
-            pushDestination(match);
+          pushDestination(match);
+
+          if (sourceId && sourceId.includes("_") && (matchedText || matches)) {
+            setFullMessage(formatMatchedText(matches, matchedText));
           }
         } else {
           pushFallbackMessage();

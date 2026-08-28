@@ -37,14 +37,51 @@ const DESTINATIONS = {
 };
 
 // ===== SPECIFIC FACTS =====
+// Members merged from this branch's original 6-person list and Derrick's
+// server/knowledge/members.json (release/2.1.0). Reconciled per team decision:
+//   - Oliver Manuel's title is "VP of Infrastructure" (Derrick's per-department
+//     VP structure), not the club-wide "Vice President" this branch used before.
+//   - Infrastructure team members (you, Derrick, Jeyden, Skye, Walker) use the
+//     title "Infrastructure Member", matching Derrick's naming convention.
+//   - Former members (e.g. Jermain Antillon, ex-VP of Marketing) are excluded —
+//     only current members should surface when someone asks "who are the members".
+// Each members fact carries a `team` tag (matching Derrick's members.json
+// department field). This lets a query that names a team explicitly (e.g.
+// "who are the infrastructure members") filter by that exact tag instead of
+// relying only on vector-score clustering — see MEMBER_TEAM_BY_ID and
+// detectMentionedTeam() below for why that matters.
 const SPECIFIC_FACTS = {
   members: [
-    { id: "members_oliver", text: "Oliver Manuel is the Vice President of TMU AIMLA and Project Lead of the AIMLA website rebuild." },
-    { id: "members_antonio", text: "Antonio Souza is the President of TMU AIMLA, responsible for leading the club and overseeing all operations." },
-    { id: "members_gab", text: "Gab Talavera is the Infrastructure Associate at AIMLA, responsible for the intent resolver and backend services." },
-    { id: "members_derrick", text: "Derrick Lam is an Infrastructure Associate at AIMLA, responsible for frontend implementation and text streaming on the AIMLA website." },
-    { id: "members_jeyden", text: "Jeyden Ramesh is an Infrastructure Associate at AIMLA, responsible for website integration, deployment, and DevOps." },
-    { id: "members_maryam", text: "Maryam Mehdi is the VP of Marketing at TMU AIMLA, responsible for branding and outreach." },
+    // Executive
+    { id: "members_antonio", team: "Executive", text: "Antonio Souza is the President of TMU AIMLA, responsible for leading the club and overseeing all operations." },
+    // Events
+    { id: "members_areej", team: "Events", text: "Areej Ubaid is a VP of Events for TMU AIMLA and helps lead the Events department." },
+    { id: "members_jarin", team: "Events", text: "Jarin Yasmin Mim is a VP of Events for TMU AIMLA and helps lead the Events department." },
+    // Finances
+    { id: "members_seif", team: "Finances", text: "Seif Eltamboly is the VP of Finance for TMU AIMLA and leads the Finances department." },
+    // Marketing
+    { id: "members_maryam", team: "Marketing", text: "Maryam Mehdi is the VP of Marketing for TMU AIMLA and leads the Marketing department." },
+    { id: "members_joel", team: "Marketing", text: "Joel Oguachuba is a member of the TMU AIMLA Marketing department." },
+    { id: "members_shriya", team: "Marketing", text: "Shriya Gill is a member of the TMU AIMLA Marketing department." },
+    { id: "members_lana", team: "Marketing", text: "Lana Duong is a member of the TMU AIMLA Marketing department." },
+    // Infrastructure
+    { id: "members_oliver", team: "Infrastructure", text: "Oliver Manuel is the VP of Infrastructure for TMU AIMLA and leads the Infrastructure department." },
+    { id: "members_gab", team: "Infrastructure", text: "Gab Talavera is an Infrastructure Member at TMU AIMLA, responsible for the intent resolver and backend services." },
+    { id: "members_derrick", team: "Infrastructure", text: "Derrick Lam is an Infrastructure Member at TMU AIMLA, responsible for frontend implementation and text streaming on the AIMLA website." },
+    { id: "members_jeyden", team: "Infrastructure", text: "Jeyden Ramesh is an Infrastructure Member at TMU AIMLA, responsible for website integration, deployment, and DevOps." },
+    { id: "members_skye", team: "Infrastructure", text: "Skye is a member of the TMU AIMLA Infrastructure department." },
+    { id: "members_walker", team: "Infrastructure", text: "Walker Egsgard is a member of the TMU AIMLA Infrastructure department." },
+    // Outreach
+    { id: "members_jenison", team: "Outreach", text: "Jenison Joseph is the VP of Outreach for TMU AIMLA and leads the Outreach department." },
+    { id: "members_ronald", team: "Outreach", text: "Ronald Bessada is a member of the TMU AIMLA Outreach department." },
+    // Social Media
+    { id: "members_christina", team: "Social Media", text: "Christina Vanni is a VP of Social Media for TMU AIMLA and helps lead the Social Media department." },
+    { id: "members_zulaikha", team: "Social Media", text: "Zulaikha Khoram is a VP of Social Media for TMU AIMLA and helps lead the Social Media department." },
+    // Education
+    { id: "members_belal", team: "Education", text: "Belal Armanazi is the VP of Education for TMU AIMLA and leads the Education department." },
+    { id: "members_nousha", team: "Education", text: "Nousha Borhani is a member of the TMU AIMLA Education department." },
+    // General Members
+    { id: "members_malaika", team: "General Members", text: "Malaika Ali is a general member of TMU AIMLA." },
   ],
   projects: [
     { id: "projects_website", text: "The AIMLA AI-native website uses vector embeddings and semantic intent resolution to navigate users to the right content." },
@@ -52,7 +89,50 @@ const SPECIFIC_FACTS = {
   ],
 };
 
+// id -> team lookup, built once from SPECIFIC_FACTS.members, so /api/resolve can filter
+// Chroma's results (which only carry {id, text, score}) by exact department membership.
+const MEMBER_TEAM_BY_ID = new Map(
+  SPECIFIC_FACTS.members.map((fact) => [fact.id, fact.team])
+);
+
+// Deterministic team-name detection. Vector similarity alone isn't reliable for "does
+// this person belong to team X" — e.g. "Gab ... responsible for the intent resolver and
+// backend services" scored notably lower than "Jeyden ... website integration,
+// deployment, and DevOps" even though both are Infrastructure, just because of word
+// choice. When the query explicitly names a team, prefer that exact tag over score
+// clustering so real teammates never get dropped due to embedding noise.
+const TEAM_KEYWORDS = [
+  { team: "Infrastructure", pattern: /\binfrastructure\b/i },
+  { team: "Marketing", pattern: /\bmarketing\b/i },
+  { team: "Events", pattern: /\bevents?\b/i },
+  { team: "Finances", pattern: /\bfinance(s)?\b/i },
+  { team: "Outreach", pattern: /\boutreach\b/i },
+  { team: "Social Media", pattern: /\bsocial media\b/i },
+  { team: "Education", pattern: /\beducation\b/i },
+  { team: "Executive", pattern: /\bexecutive\b/i },
+  { team: "General Members", pattern: /\bgeneral members?\b/i },
+];
+
+function detectMentionedTeam(query) {
+  const found = TEAM_KEYWORDS.find(({ pattern }) => pattern.test(query));
+  return found ? found.team : null;
+}
+
 const CONFIDENCE_THRESHOLD = 0.10;
+
+// How close (in cosine-similarity units) a specific fact's score needs to be to the
+// best-scoring fact in its destination before we treat it as "also relevant" and fold
+// it into a combined, multi-fact response instead of returning just the single top hit.
+// Broad phrasing ("who are the members") widens this margin so more facts qualify;
+// narrow phrasing ("who is gab") keeps it tight so only the true match comes back.
+const MULTI_MATCH_MARGIN = 0.08;
+const BROAD_MULTI_MATCH_MARGIN = 0.14;
+
+// Loose "asking about a group" phrasing. This only widens the margin above — it never
+// decides by itself whether to combine results. The actual decision is driven by how
+// tightly the vector scores for that destination's facts cluster near the top score.
+const BROAD_QUERY_PATTERN =
+  /\b(who are|which (people|members|projects|associates)|list|show (me|all)|all (the|of)|everyone|every one|full list|entire team)\b/i;
 
 const chromaClient = new ChromaClient({ path: "http://localhost:8000" });
 let collection;
@@ -113,44 +193,121 @@ app.post("/api/resolve", async (req, res) => {
     const output = await extractor([input], { pooling: "mean", normalize: true });
     const queryEmbedding = output.tolist()[0];
 
-    // ask Chroma for the 3 closest matches
-    // Chroma returns distance (lower = closer), not similarity (higher = closer)
+    // Ask Chroma for scores against the whole corpus (it's still small — under 40 entries)
+    // so we can see every specific fact under the winning destination, not just the top 3.
+    // This must cover the FULL corpus (no arbitrary cap): capping below corpusSize risks
+    // silently dropping some of a destination's facts from a broad query's results — e.g.
+    // members alone is now 20+ entries, so a low cap could cut off legitimate matches.
+    // Chroma returns distance (lower = closer), not similarity (higher = closer).
+    const corpusSize = await collection.count();
     const results = await collection.query({
       queryEmbeddings: [queryEmbedding],
-      nResults: 3,
+      nResults: Math.max(1, corpusSize),
     });
 
-    // log top 3 matches with their similarity scores
-    console.log("Top matches:");
-    results.ids[0].forEach((id, i) => {
-      const similarity = 1 - results.distances[0][i]; // convert distance to similarity
-      console.log(`  ${id}: ${similarity.toFixed(2)}`);
-    });
+    const scored = results.ids[0].map((id, i) => ({
+      id,
+      text: results.documents[0][i],
+      score: 1 - results.distances[0][i], // convert distance to similarity
+    }));
 
-    const bestId = results.ids[0][0];
-    const bestScore = 1 - results.distances[0][0];
+    // log every candidate's similarity score
+    console.log("Candidate matches:");
+    scored.forEach(({ id, score }) => console.log(`  ${id}: ${score.toFixed(2)}`));
 
-    console.log(`→ matched: ${bestId} (${bestScore.toFixed(2)})\n`);
-    const destinationId = bestId.split("_")[0];
+    const best = scored[0];
+    console.log(`→ top match: ${best.id} (${best.score.toFixed(2)})\n`);
 
-    if (bestScore >= CONFIDENCE_THRESHOLD) {
-    const matchedDocument = results.documents[0][0];
+    if (best.score < CONFIDENCE_THRESHOLD) {
+      return res.status(200).json({
+        match: null,
+        confidence: "low",
+        reason: "unsupported_request",
+        suggestions: ["about", "events", "join"],
+      });
+    }
+
+    const destinationId = best.id.split("_")[0];
+
+    // If the query names a specific team (e.g. "who are the infrastructure members"),
+    // trust that exact tag over vector-score clustering. This is what saves teammates
+    // like Gab from getting dropped just because their fact's wording happens to sit a
+    // little further from the score cluster in embedding space — team membership here
+    // is a known fact (from SPECIFIC_FACTS), not something we need to infer from scores.
+    if (destinationId === "members") {
+      const mentionedTeam = detectMentionedTeam(input);
+
+      if (mentionedTeam) {
+        const teamFacts = scored.filter(
+          (r) => MEMBER_TEAM_BY_ID.get(r.id) === mentionedTeam && r.score >= CONFIDENCE_THRESHOLD
+        );
+
+        if (teamFacts.length > 0) {
+          console.log(
+            `→ team keyword "${mentionedTeam}" matched ${teamFacts.length} fact(s): ${teamFacts
+              .map((f) => f.id)
+              .join(", ")}\n`
+          );
+
+          return res.status(200).json({
+            match: destinationId,
+            confidence: "high",
+            reason: teamFacts.length > 1 ? "vector_match_multi" : "vector_match",
+            sourceId: teamFacts.map((f) => f.id).join(","),
+            matchedText: teamFacts[0].text,
+            matches: teamFacts.map((f) => ({
+              sourceId: f.id,
+              text: f.text,
+              score: Number(f.score.toFixed(3)),
+            })),
+          });
+        }
+      }
+    }
+
+    // Gather every specific fact filed under the winning destination (e.g. "members_*")
+    // and see how tightly their scores cluster near the best one of that group. A tight
+    // cluster means the query is asking about several of them at once (e.g. "who are the
+    // members" or "who are the infrastructure associates"); a lone standout means the
+    // query is about one specific thing (e.g. "who is gab").
+    const destinationFacts = scored.filter((r) => r.id.startsWith(`${destinationId}_`));
+    const topFactScore = destinationFacts[0]?.score ?? best.score;
+    const isBroadPhrasing = BROAD_QUERY_PATTERN.test(input);
+    const margin = isBroadPhrasing ? BROAD_MULTI_MATCH_MARGIN : MULTI_MATCH_MARGIN;
+
+    const clusteredFacts = destinationFacts.filter(
+      (r) => r.score >= CONFIDENCE_THRESHOLD && r.score >= topFactScore - margin
+    );
+
+    if (clusteredFacts.length >= 2) {
+      console.log(
+        `→ combining ${clusteredFacts.length} facts for "${destinationId}": ${clusteredFacts
+          .map((f) => f.id)
+          .join(", ")}\n`
+      );
+
+      return res.status(200).json({
+        match: destinationId,
+        confidence: "high",
+        reason: "vector_match_multi",
+        sourceId: clusteredFacts.map((f) => f.id).join(","),
+        matchedText: clusteredFacts[0].text,
+        matches: clusteredFacts.map((f) => ({
+          sourceId: f.id,
+          text: f.text,
+          score: Number(f.score.toFixed(3)),
+        })),
+      });
+    }
+
     return res.status(200).json({
       match: destinationId,
       confidence: "high",
       reason: "vector_match",
-      sourceId: bestId,
-      matchedText: matchedDocument,
+      sourceId: best.id,
+      matchedText: best.text,
+      matches: [{ sourceId: best.id, text: best.text, score: Number(best.score.toFixed(3)) }],
     });
-  } else {
-    return res.status(200).json({
-      match: null,
-      confidence: "low",
-      reason: "unsupported_request",
-      suggestions: ["about", "events", "join"],
-    });
-  }
-  
   } catch (error) {
     console.error("Resolver error:", error);
     return res.status(500).json({ error: "Resolver failed.", details: error.message });
